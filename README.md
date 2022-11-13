@@ -23,7 +23,7 @@ devtools::install_github("wezhubb/DeregGenes")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-library(DeregGenes)
+## library(DeregGenes)
 ## basic example code
 ```
 
@@ -53,3 +53,24 @@ You can also embed plots, for example:
 
 In that case, don’t forget to commit and push the resulting figure
 files, so they display on GitHub and CRAN.
+
+## References
+
+Gautier, L., Cope, L., Bolstad, B. M., and Irizarry, R. A. 2004.
+affy—analysis of Affymetrix GeneChip data at the probe level.
+Bioinformatics 20, 3 (Feb. 2004), 307-315.
+
+Ritchie, M.E., Phipson, B., Wu, D., Hu, Y., Law, C.W., Shi, W., and
+Smyth, G.K. (2015). limma powers differential expression analyses for
+RNA-sequencing and microarray studies. Nucleic Acids Research 43(7),
+e47.
+
+Hastie T, Tibshirani R, Narasimhan B, Chu G (2022). *impute: impute:
+Imputation for microarray data*. R package version 1.70.0.
+
+Kolde R (2019). *pheatmap: Pretty Heatmaps*. R package version 1.0.12,
+<https://CRAN.R-project.org/package=pheatmap>.
+
+Kolde R (2022). *RobustRankAggreg: Methods for Robust Rank Aggregation*.
+R package version 1.2.1,
+<https://CRAN.R-project.org/package=RobustRankAggreg>.
