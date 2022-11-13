@@ -1,11 +1,25 @@
 Package: DeregGenes
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Pefroming gene expression level analysis in CEL format data
 Version: 0.1.0
-Author: Who wrote it WenzhuYe 
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: person("Wenzhu", "Ye", 
+                  email = "w.ye@utoronto.ca", 
+                  role = c("aut", "cre"))
+Maintainer: Wenzhu Ye <w.ye@utoronto.ca>
+Description: DeregGenes is a R pacakge to find genes that are deregulated in different diseases and produce heatmap of them. 
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.2.2
+Roxygen: list(markdown = TRUE)
+Depends: R (>= 4.2.0)
+Imports: 
+    affy (>= 1.74.0),
+    impute,
+    limma (>= 3.52.0),
+    pheatmap (>= 1.0.12),
+    RobustRankAggreg (>= 1.2.1)
+Suggests: 
+    rmarkdown,
+    knitr,
+    testthat (>= 3.0.0)
