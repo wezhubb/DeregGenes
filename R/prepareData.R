@@ -61,6 +61,9 @@
 #'     landscape of promoter DNA hypomethylation in liver cancer. Cancer Res
 #'     2011 Sep 1;71(17):5891-903. PMID: 21747116
 #'
+#' Carvalho B (2015). pd.hg.u133.plus.2: Platform Design Info for The
+#'     Manufacturer's Name HG-U133_Plus_2. R package version 3.12.0.
+#'
 #' @examples
 #' # Require download of about 90MB file.
 #' \dontrun{
@@ -86,6 +89,7 @@
 #' @importFrom biomaRt useEnsembl getBM
 #' @import tidyverse
 #' @importFrom dplyr %>%
+#' @import pd.hg.u133.plus.2
 #'
 
 prepareData <- function(celpath, isAffymetrix = TRUE) {

@@ -85,4 +85,7 @@ R package version 1.0.10, \url{https://CRAN.R-project.org/package=dplyr}.
 Stefanska B, Huang J, Bhattacharyya B, Suderman M et al. Definition of the
 landscape of promoter DNA hypomethylation in liver cancer. Cancer Res
 2011 Sep 1;71(17):5891-903. PMID: 21747116
+
+Carvalho B (2015). pd.hg.u133.plus.2: Platform Design Info for The
+Manufacturer's Name HG-U133_Plus_2. R package version 3.12.0.
 }
