@@ -14,6 +14,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  message = FALSE,
+  warning = FALSE,
   comment = "#>"
 )
 ```
@@ -23,9 +25,6 @@ library(DeregGenes)
 
 # load in helper packages for the demo
 library(GEOquery)
-library(dplyr)
-#library(raster)
-#library(tiff)
 ```
 
 ## Introduction
@@ -46,7 +45,7 @@ lsf.str("package:DeregGenes")
 ```
 
 ## Workflow
-In the following session, I will demonstated the use of **DeregGenes** by analysis of gene expression data GSE84402[@GSE84402] and GSE29721[@GSE29721]. 
+In the following session, I will demonstated the use of **DeregGenes** by analysis of gene expression data from GEO GSE84402 and GSE29721. 
 
 ### step 1: preparing and annotating data 
 Before the formal analysis, it is important to clean the data by removing NULL value, and annotate data by convert the porbe ID/gene ID to universal HGNC gene symbols. The reason for preparing and annotating data is to make any further analysis easier to perform.
@@ -86,11 +85,11 @@ Prepare data:
 ```{r prepare_data}
 # preparing data1
 data1 <- prepareData(untarPath1, TRUE)
-data1
+head(data1)
 
 # preparing data2
 data2 <- prepareData(untarPath2, TRUE)
-data2
+head(data2)
 
 ```
 
@@ -117,7 +116,7 @@ class <- c("mutant", "control","mutant", "control","mutant", "control",
      "control","mutant", "control","mutant", "control", "mutant", "control")
 result1 <- logFCsingle(data1, class)
 
-result1
+head(result1)
 
 ```
 
@@ -132,7 +131,7 @@ class <- c("mutant", "control","mutant", "control","mutant", "control",
      "control")
 result2 <- logFCsingle(data2, class)
 
-result2
+head(result2)
 ```
 
 ### step 3: Aggregate differential expression from GSE29721 and GSE84402
@@ -149,9 +148,9 @@ listTitle <- c("GSE29721", "GSE84402")
 # aggregate
 aggreg <- Aggreg(listLogFC, listTitle)
 
-aggreg[1]
-aggreg[2]
-aggreg[3]
+head(aggreg[1])
+head(aggreg[2])
+head(aggreg[3])
 
 ```
 
@@ -187,6 +186,10 @@ Notice that the comment below will not be execute here since the purpose of the 
 * Kolde R (2022). _RobustRankAggreg: Methods for Robust Rank Aggregation_. R package version 1.2.1, <https://CRAN.R-project.org/package=RobustRankAggreg>.
 
 * Kolde R (2019). _pheatmap: Pretty Heatmaps_. R package version 1.0.12, <https://CRAN.R-project.org/package=pheatmap>.
+
+* Wang H, Huo X, Yang XR, He J et al. STAT3-mediated upregulation of lncRNA HOXD-AS1 as a ceRNA facilitates liver cancer metastasis by regulating SOX4. Mol Cancer 2017 Aug 14;16(1):136. PMID: 28810927
+
+* Stefanska B, Huang J, Bhattacharyya B, Suderman M et al. Definition of the landscape of promoter DNA hypomethylation in liver cancer. Cancer Res 2011 Sep 1;71(17):5891-903. PMID: 21747116
 
 ```{r}
 sessionInfo()

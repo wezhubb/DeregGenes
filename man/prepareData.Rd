@@ -80,4 +80,8 @@ doi:10.21105/joss.01686 \url{https://doi.org/10.21105/joss.01686}.
 Wickham H, François R, Henry L, Müller K (2022).
 \emph{dplyr: A Grammar of Data Manipulation}.
 R package version 1.0.10, \url{https://CRAN.R-project.org/package=dplyr}.
+
+Stefanska B, Huang J, Bhattacharyya B, Suderman M et al. Definition of the
+landscape of promoter DNA hypomethylation in liver cancer. Cancer Res
+2011 Sep 1;71(17):5891-903. PMID: 21747116
 }

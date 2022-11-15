@@ -50,9 +50,19 @@ There are 4 functions in `DeregGenes`
 
 `Aggreg`: A function to aggregate different gene expression fold changes across different studies. This function will create a list of length three. The first element of the list is a data frame of up-regulated differential genes. The second element of the list is a data frame of down-regulated differential genes. For the first two data frame, each row a a different genes, and there will be four columns: gene symbol(Name), p value(Pvalue), adjust p value(adjPvalue), and expressional change(logFC). The last element of the list is a aggregated data frame where each row is a gene, and each column is the logFC of different studies.
 
+`plotHeatMap`: A function to draw a heatmap representation of differential gene expression corss different studies. Notice that this function will not return the heatmap, but will stored the heat map in local directory.
+
+Below is a flowchart demonstart the work flow of this package.
+
 ![](./inst/extdata/flowchart.jpeg){ width=75% }
+See `help(package = "DeregGenes")` for further details and references provided by `citation("DeregGenes")`.
 
 ## Contributions
+The package is created by Wenzhu Ye.
+
+The `prepareData` function use of `biomaRt` package to get the HGNC gene symbol.
+The `logFCsingle` function use of `limma` package to compute linear fit of the gene expression.
+The `plotHeatMap` function use of `pheatmap` package to plot the heatmap.
 
 ## Acknowledgements
 This package was developed as part of an assessment for 2022f BCB410H: Applied Bioinformatics, University of Toronto, Toronto, Canada.
@@ -77,4 +87,8 @@ Hastie T, Tibshirani R, Narasimhan B, Chu G (2022). _impute: impute: Imputation 
 Kolde R (2022). _RobustRankAggreg: Methods for Robust Rank Aggregation_. R package version 1.2.1, <https://CRAN.R-project.org/package=RobustRankAggreg>.
 
 Kolde R (2019). _pheatmap: Pretty Heatmaps_. R package version 1.0.12, <https://CRAN.R-project.org/package=pheatmap>.
+
+Wang H, Huo X, Yang XR, He J et al. STAT3-mediated upregulation of lncRNA HOXD-AS1 as a ceRNA facilitates liver cancer metastasis by regulating SOX4. Mol Cancer 2017 Aug 14;16(1):136. PMID: 28810927
+
+Stefanska B, Huang J, Bhattacharyya B, Suderman M et al. Definition of the landscape of promoter DNA hypomethylation in liver cancer. Cancer Res 2011 Sep 1;71(17):5891-903. PMID: 21747116
 

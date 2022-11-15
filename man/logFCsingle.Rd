@@ -66,4 +66,8 @@ RNA-sequencing and microarray studies. Nucleic Acids Research 43(7), e47.
 Hastie T, Tibshirani R, Narasimhan B, Chu G (2022).
 \emph{impute: impute: Imputation for microarray data}. R package version
 1.70.0.
+
+Stefanska B, Huang J, Bhattacharyya B, Suderman M et al. Definition of the
+landscape of promoter DNA hypomethylation in liver cancer. Cancer Res
+2011 Sep 1;71(17):5891-903. PMID: 21747116
 }

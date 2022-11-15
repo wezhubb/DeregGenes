@@ -73,9 +73,25 @@ expressional change(logFC). The last element of the list is a aggregated
 data frame where each row is a gene, and each column is the logFC of
 different studies.
 
-<img src="./inst/extdata/flowchart.jpeg" style="width:75.0%" />
+`plotHeatMap`: A function to draw a heatmap representation of
+differential gene expression corss different studies. Notice that this
+function will not return the heatmap, but will stored the heat map in
+local directory.
+
+Below is a flowchart demonstart the work flow of this package.
+
+<img src="./inst/extdata/flowchart.jpeg" style="width:75.0%" /> See
+`help(package = "DeregGenes")` for further details and references
+provided by `citation("DeregGenes")`.
 
 ## Contributions
+
+The package is created by Wenzhu Ye.
+
+The `prepareData` function use of `biomaRt` package to get the HGNC gene
+symbol. The `logFCsingle` function use of `limma` package to compute
+linear fit of the gene expression. The `plotHeatMap` function use of
+`pheatmap` package to plot the heatmap.
 
 ## Acknowledgements
 
@@ -125,3 +141,11 @@ R package version 1.2.1,
 
 Kolde R (2019). *pheatmap: Pretty Heatmaps*. R package version 1.0.12,
 <https://CRAN.R-project.org/package=pheatmap>.
+
+Wang H, Huo X, Yang XR, He J et al. STAT3-mediated upregulation of
+lncRNA HOXD-AS1 as a ceRNA facilitates liver cancer metastasis by
+regulating SOX4. Mol Cancer 2017 Aug 14;16(1):136. PMID: 28810927
+
+Stefanska B, Huang J, Bhattacharyya B, Suderman M et al. Definition of
+the landscape of promoter DNA hypomethylation in liver cancer. Cancer
+Res 2011 Sep 1;71(17):5891-903. PMID: 21747116

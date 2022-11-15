@@ -32,6 +32,14 @@
 #'     _dplyr: A Grammar of Data Manipulation_.
 #'     R package version 1.0.10, <https://CRAN.R-project.org/package=dplyr>.
 #'
+#' Wang H, Huo X, Yang XR, He J et al. STAT3-mediated upregulation of lncRNA
+#'     HOXD-AS1 as a ceRNA facilitates liver cancer metastasis by regulating
+#'     SOX4. Mol Cancer 2017 Aug 14;16(1):136. PMID: 28810927
+#'
+#' Stefanska B, Huang J, Bhattacharyya B, Suderman M et al. Definition of the
+#'     landscape of promoter DNA hypomethylation in liver cancer. Cancer Res
+#'     2011 Sep 1;71(17):5891-903. PMID: 21747116
+#'
 #' @examples
 #' # Require download of about 300MB file.
 #' \dontrun{
