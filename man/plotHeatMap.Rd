@@ -83,7 +83,7 @@ unlink(untarPath, recursive = TRUE)
 
 
 # aggregate
-listLogFC <- c(result, result2)
+listLogFC <- list(result, result2)
 listTitle <- c("GSE29721", "GSE84402")
 aggreg <- Aggreg(listLogFC, listTitle)
 

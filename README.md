@@ -36,7 +36,7 @@ require("devtools")
 devtools::install_github("wezhubb/DeregGenes", build_vignettes = TRUE)
 #> Downloading GitHub repo wezhubb/DeregGenes@HEAD
 #> Skipping 5 packages not available: limma, oligo, impute, biomaRt, affy
-#> * checking for file ‘/private/var/folders/8j/xj1c7l6s505b2r61h7_hktsw0000gn/T/RtmpHIVBry/remotes951a81b5dca/wezhubb-DeregGenes-dd98f5d/DESCRIPTION’ ... OK
+#> * checking for file ‘/private/var/folders/8j/xj1c7l6s505b2r61h7_hktsw0000gn/T/RtmpOD1zZ9/remotesab9ab5e9de6/wezhubb-DeregGenes-b561edb/DESCRIPTION’ ... OK
 #> * preparing ‘DeregGenes’:
 #> * checking DESCRIPTION meta-information ... OK
 #> * checking for LF line-endings in source and make files and shell scripts
@@ -44,6 +44,8 @@ devtools::install_github("wezhubb/DeregGenes", build_vignettes = TRUE)
 #> Omitted ‘LazyData’ from DESCRIPTION
 #> * building ‘DeregGenes_0.1.0.tar.gz’
 library("DeregGenes")
+#> Warning: replacing previous import 'biomaRt::select' by 'dplyr::select' when
+#> loading 'DeregGenes'
 #> Warning: replacing previous import 'affy::mm<-' by 'oligo::mm<-' when loading
 #> 'DeregGenes'
 #> Warning: replacing previous import 'limma::backgroundCorrect' by
@@ -60,6 +62,8 @@ library("DeregGenes")
 #> loading 'DeregGenes'
 #> Warning: replacing previous import 'affy::MAplot' by 'oligo::MAplot' when
 #> loading 'DeregGenes'
+#> Warning: replacing previous import 'dplyr::summarize' by 'oligo::summarize' when
+#> loading 'DeregGenes'
 #> Warning: replacing previous import 'affy::pmindex' by 'oligo::pmindex' when
 #> loading 'DeregGenes'
 #> Warning: replacing previous import 'affy::pm<-' by 'oligo::pm<-' when loading
@@ -71,10 +75,13 @@ library("DeregGenes")
 ## Overview
 
 ``` r
-#ls("package:DeregGenes")
+ls("package:DeregGenes")
+#> [1] "Aggreg"      "logFCsingle" "plotHeatMap" "prepareData"
 browseVignettes("DeregGenes")
 #> No vignettes found by browseVignettes("DeregGenes")
 ```
+
+<img src="./inst/extdata/flowchart.jpeg" style="width:75.0%" />
 
 ## Contributions
 
@@ -85,9 +92,32 @@ Applied Bioinformatics, University of Toronto, Toronto, Canada.
 
 ## References
 
+Carvalho B. S., and Irizarry, R. A. 2010. A Framework for
+Oligonucleotide Microarray Preprocessing Bioinformatics.
+
 Gautier, L., Cope, L., Bolstad, B. M., and Irizarry, R. A. 2004.
 affy—analysis of Affymetrix GeneChip data at the probe level.
 Bioinformatics 20, 3 (Feb. 2004), 307-315.
+
+Mapping identifiers for the integration of genomic datasets with the
+R/Bioconductor package biomaRt. Steffen Durinck, Paul T. Spellman, Ewan
+Birney and Wolfgang Huber, Nature Protocols 4, 1184-1191 (2009).
+
+BioMart and Bioconductor: a powerful link between biological databases
+and microarray data analysis. Steffen Durinck, Yves Moreau, Arek
+Kasprzyk, Sean Davis, Bart De Moor, Alvis Brazma and Wolfgang Huber,
+Bioinformatics 21, 3439-3440 (2005).
+
+Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R,
+Grolemund G, Hayes A, Henry L, Hester J, Kuhn M, Pedersen TL, Miller E,
+Bache SM, Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K,
+Vaughan D, Wilke C, Woo K, Yutani H (2019). “Welcome to the tidyverse.”
+*Journal of Open Source Software*, *4*(43), 1686.
+<doi:10.21105/joss.01686> <https://doi.org/10.21105/joss.01686>.
+
+Wickham H, François R, Henry L, Müller K (2022). *dplyr: A Grammar of
+Data Manipulation*. R package version 1.0.10,
+<https://CRAN.R-project.org/package=dplyr>.
 
 Ritchie, M.E., Phipson, B., Wu, D., Hu, Y., Law, C.W., Shi, W., and
 Smyth, G.K. (2015). limma powers differential expression analyses for
@@ -97,9 +127,9 @@ e47.
 Hastie T, Tibshirani R, Narasimhan B, Chu G (2022). *impute: impute:
 Imputation for microarray data*. R package version 1.70.0.
 
-Kolde R (2019). *pheatmap: Pretty Heatmaps*. R package version 1.0.12,
-<https://CRAN.R-project.org/package=pheatmap>.
-
 Kolde R (2022). *RobustRankAggreg: Methods for Robust Rank Aggregation*.
 R package version 1.2.1,
 <https://CRAN.R-project.org/package=RobustRankAggreg>.
+
+Kolde R (2019). *pheatmap: Pretty Heatmaps*. R package version 1.0.12,
+<https://CRAN.R-project.org/package=pheatmap>.

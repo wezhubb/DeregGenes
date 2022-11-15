@@ -1,7 +1,7 @@
 Package: DeregGenes
 Type: Package
 Title: Pefroming gene expression level analysis in CEL format data
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: person("Wenzhu", "Ye", 
                   email = "w.ye@utoronto.ca", 
                   role = c("aut", "cre"))
