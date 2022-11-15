@@ -57,14 +57,14 @@
 #' }
 #'
 #' @export
-#' @import limma
+#' @importFrom limma lmFit makeContrasts contrasts.fit eBayes
 #' @import impute
 
 logFCsingle <- function(expressionLevel, setUp) {
   # --- impute missing expression data ---
-  mat = impute.knn(expressionLevel)
-  rt = mat$data
-  rt = avereps(rt)
+  mat <- impute.knn(expressionLevel)
+  rt <- mat$data
+  rt <- avereps(rt)
 
   # --- drawing fit linear model ---
   design <- model.matrix(~ 0 + factor(setUp))

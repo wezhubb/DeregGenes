@@ -24,6 +24,10 @@ significant logFC values from down-regulated data. This number must bigger
 than 1. Notice that n must be smaller or equal the number of genes that
 are down-regulated in data.}
 }
+\value{
+This function will return 1 if the function has been executed
+successfully, and return -1 if error occurred
+}
 \description{
 plotHeatMap is a function used to draw a heatmap representation of
 differential gene expression.

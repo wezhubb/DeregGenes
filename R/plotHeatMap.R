@@ -21,6 +21,9 @@
 #'     than 1. Notice that n must be smaller or equal the number of genes that
 #'     are down-regulated in data.
 #'
+#' @return This function will return 1 if the function has been executed
+#'     successfully, and return -1 if error occurred
+#'
 #' @references
 #' Kolde R (2019). _pheatmap: Pretty Heatmaps_.
 #'     R package version 1.0.12, <https://CRAN.R-project.org/package=pheatmap>.
@@ -91,15 +94,20 @@
 #'
 #' @export
 #' @import pheatmap
-#' @import dplyr
+#' @importFrom dplyr %>%
 
 ## TODO: finish up error message in part 2
 ## TODO: fix tiff bug in part 2
 plotHeatMap <- function(data, nUp, nDown) {
 
+  if (nUp < 0 | nDown < 0) {
+    print("please enter a number greater than 0")
+    return(-1)
+  }
+
   if (missing(data) && missing(down)) {
     print("please enter data")
-    return()
+    return(-1)
   }
 
   hminput <- data
@@ -128,5 +136,5 @@ plotHeatMap <- function(data, nUp, nDown) {
   par()
   dev.off()
 
-  return()
+  return(1)
 }

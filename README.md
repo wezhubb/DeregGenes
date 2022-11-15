@@ -8,7 +8,7 @@
 
 ## Description
 
-The main objective of DeregGenes is to find genes that are
+The main objective of `DeregGenes` is to find genes that are
 deregulated(up-regulate and down- regulate) in different diseases. This
 package could also allow users to put different results together to
 generate a heatmap for cross studies analysis. It improves users’ time
@@ -22,7 +22,9 @@ and forth between different distinct packages and learn different
 documentation since the different packages will require different input
 data types which is not available on any current published r package.
 
-R requirement: 4.2.0 or later version Development platform: Mac
+-   R requirement: 4.2.0 or later version
+
+-   Development platform: Mac
 
 ## Installation
 
@@ -31,55 +33,45 @@ You can install the development version of DeregGenes from
 
 ``` r
 require("devtools")
-#> Loading required package: devtools
-#> Loading required package: usethis
 devtools::install_github("wezhubb/DeregGenes", build_vignettes = TRUE)
-#> Downloading GitHub repo wezhubb/DeregGenes@HEAD
-#> Skipping 5 packages not available: limma, oligo, impute, biomaRt, affy
-#> * checking for file ‘/private/var/folders/8j/xj1c7l6s505b2r61h7_hktsw0000gn/T/RtmpOD1zZ9/remotesab9ab5e9de6/wezhubb-DeregGenes-b561edb/DESCRIPTION’ ... OK
-#> * preparing ‘DeregGenes’:
-#> * checking DESCRIPTION meta-information ... OK
-#> * checking for LF line-endings in source and make files and shell scripts
-#> * checking for empty or unneeded directories
-#> Omitted ‘LazyData’ from DESCRIPTION
-#> * building ‘DeregGenes_0.1.0.tar.gz’
 library("DeregGenes")
-#> Warning: replacing previous import 'biomaRt::select' by 'dplyr::select' when
-#> loading 'DeregGenes'
-#> Warning: replacing previous import 'affy::mm<-' by 'oligo::mm<-' when loading
-#> 'DeregGenes'
-#> Warning: replacing previous import 'limma::backgroundCorrect' by
-#> 'oligo::backgroundCorrect' when loading 'DeregGenes'
-#> Warning: replacing previous import 'affy::mmindex' by 'oligo::mmindex' when
-#> loading 'DeregGenes'
-#> Warning: replacing previous import 'affy::pm' by 'oligo::pm' when loading
-#> 'DeregGenes'
-#> Warning: replacing previous import 'affy::probeNames' by 'oligo::probeNames'
-#> when loading 'DeregGenes'
-#> Warning: replacing previous import 'affy::rma' by 'oligo::rma' when loading
-#> 'DeregGenes'
-#> Warning: replacing previous import 'affy::intensity' by 'oligo::intensity' when
-#> loading 'DeregGenes'
-#> Warning: replacing previous import 'affy::MAplot' by 'oligo::MAplot' when
-#> loading 'DeregGenes'
-#> Warning: replacing previous import 'dplyr::summarize' by 'oligo::summarize' when
-#> loading 'DeregGenes'
-#> Warning: replacing previous import 'affy::pmindex' by 'oligo::pmindex' when
-#> loading 'DeregGenes'
-#> Warning: replacing previous import 'affy::pm<-' by 'oligo::pm<-' when loading
-#> 'DeregGenes'
-#> Warning: replacing previous import 'affy::mm' by 'oligo::mm' when loading
-#> 'DeregGenes'
 ```
 
 ## Overview
 
 ``` r
 ls("package:DeregGenes")
-#> [1] "Aggreg"      "logFCsingle" "plotHeatMap" "prepareData"
 browseVignettes("DeregGenes")
-#> No vignettes found by browseVignettes("DeregGenes")
 ```
+
+There are 4 functions in `DeregGenes`
+
+`prepareData`: A function used to clean and annotate the data, including
+handling raw CEL format data, putting together different individual
+samples into a table, converting different gene IDs and probe IDs to
+universal HGNC gene symbols, and joining different tables. This function
+will create a data matrix in which each row represent different
+gene(with the gene symbol in its rowname), and each column represent
+different gene’s expression level in different sample.
+
+`logFCsingle`: A function to analyze the gene expression data to find
+gene expression fold change/gene differential expression for each gene
+in a single study. This function will create a data frame where each row
+represent different genes, and six columns that gives expressional
+change(logFC), average expression(AveExpr), t value(t), p
+value(P.Value), adjusted p value(adj.P.Val), and log-odd
+ratio/B-statistic(B).
+
+`Aggreg`: A function to aggregate different gene expression fold changes
+across different studies. This function will create a list of length
+three. The first element of the list is a data frame of up-regulated
+differential genes. The second element of the list is a data frame of
+down-regulated differential genes. For the first two data frame, each
+row a a different genes, and there will be four columns: gene
+symbol(Name), p value(Pvalue), adjust p value(adjPvalue), and
+expressional change(logFC). The last element of the list is a aggregated
+data frame where each row is a gene, and each column is the logFC of
+different studies.
 
 <img src="./inst/extdata/flowchart.jpeg" style="width:75.0%" />
 

@@ -72,10 +72,10 @@
 #' }
 #'
 #' @export
-#' @import oligo
-#' @import biomaRt
+#' @importFrom oligo read.celfiles rma
+#' @importFrom biomaRt useEnsembl getBM
 #' @import tidyverse
-#' @import dplyr
+#' @importFrom dplyr %>%
 #'
 
 prepareData <- function(celpath, isAffymetrix = TRUE) {
