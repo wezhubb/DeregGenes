@@ -47,6 +47,11 @@
 #'     _Journal of Open Source Software_, *4*(43), 1686.
 #'     doi:10.21105/joss.01686 <https://doi.org/10.21105/joss.01686>.
 #'
+#' Wickham H, François R, Henry L, Müller K (2022).
+#'     _dplyr: A Grammar of Data Manipulation_.
+#'     R package version 1.0.10, <https://CRAN.R-project.org/package=dplyr>.
+#'
+#'
 #' @examples
 #' # Require download of about 90MB file.
 #' \dontrun{
@@ -67,10 +72,10 @@
 #' }
 #'
 #' @export
-#' @import affy
 #' @import oligo
 #' @import biomaRt
 #' @import tidyverse
+#' @import dplyr
 #'
 
 prepareData <- function(celpath, isAffymetrix = TRUE) {

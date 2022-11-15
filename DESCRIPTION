@@ -14,7 +14,6 @@ RoxygenNote: 7.2.2
 Roxygen: list(markdown = TRUE)
 Depends: R (>= 4.2.0)
 Imports: 
-    affy (>= 1.74.0),
     biomaRt,
     impute,
     oligo,
@@ -28,3 +27,4 @@ Suggests:
     knitr,
     GEOquery,
     testthat (>= 3.0.0)
+VignetteBuilder: knitr

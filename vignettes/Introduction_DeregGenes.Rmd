@@ -1,0 +1,120 @@
+---
+title: "Introduction_DeregGenes"
+date: "`r format(Sys.time(), '%d %b %Y')`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: false
+vignette: >
+  %\VignetteIndexEntry{Introduction_DeregGenes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(DeregGenes)
+
+# load in helper packages for the demo
+library(GEOquery)
+```
+
+## Introduction
+
+The main objective of **DeregGenes** is to find genes that are deregulated(up-regulate and down- regulate) in different diseases. This package could also allow users to put different results together to generate a heatmap for cross studies analysis by function __*prepareData*__ . It improves users’ time on massive data cleaning and data annotating processes prior to the analysis since different data prepared by different platforms will need to be handled by different tools. This package also allows user to compute gene differential expression data for single study using function __*logFCsingle*__. Moreover, the function __*Aggreg*__ provides a simple way to let users get a summarised result across multiple current studies data to provide them with a more confident result and conclusion. Also, using this package will save users time to switch back and forth between different distinct packages and learn different documentation since the different packages will require different input data types which is not available on any current published r package. Lastly, the package can generate heat maps of gene differential expression across stuides using function __*plotHeatMap*__.
+
+See `help(package = "DeregGenes")` for further details and references provided by `citation("DeregGenes")`. To download **DeregGenes**, use the following commands:
+
+``` r
+require("devtools")
+install_github("wezhubb/DeregGenes", build_vignettes = TRUE)
+library("DeregGenes")
+```
+
+To list all functions available in the package:
+``` r
+lsf.str("package:DeregGenes")
+```
+
+## Workflow
+In the following session, I will demonstated the use of **DeregGenes** by analysis of gene expression data GSE84402[@GSE84402] and GSE29721[@GSE29721]. 
+
+### step 1: preparing and annotating data 
+Before the formal analysis, it is important to clean the data by removing NULL value, and annotate data by convert the porbe ID/gene ID to universal HGNC gene symbols. The reason for preparing and annotating data is to make any further analysis easier to perform.
+
+To download the data in current directory:
+
+```{r download_data}
+# download data1(GSE29721) from GEO into current directory
+filePaths1 <- getGEOSuppFiles("GSE29721")
+
+# download data2 from GEO from GEO into current directory
+filePaths2 <- getGEOSuppFiles("GSE84402")
+
+```
+
+Because the downloaded file is ziped, we need to unzip the file and delete the orignal zip file:
+
+```{r zip_data}
+# untar downloaded data1 and delete tar file
+untarPath1 <- strsplit(row.names(filePaths1), '/')
+untarPath1 <- paste(untarPath1[[1]][1:length(untarPath1[[1]]) - 1],
+     collapse="/")
+untar(row.names(filePaths1), exdir = untarPath1)
+unlink(paste(untarPath1, '/*.tar', sep = ''))
+
+# untar downloaded data2 and delete tar file
+untarPath2 <- strsplit(row.names(filePaths2), '/')
+untarPath2 <- paste(untarPath2[[1]][1:length(untarPath2[[1]]) - 1],
+     collapse="/")
+untar(row.names(filePaths2), exdir = untarPath2)
+unlink(paste(untarPath2, '/*.tar', sep = ''))
+
+```
+
+Prepare data:
+
+```{r prepare_data}
+# preparing data1
+data1 <- prepareData(untarPath1, TRUE)
+data1
+
+# preparing data2
+data2 <- prepareData(untarPath2, TRUE)
+data2
+
+```
+
+
+After finishing the preparing process and stored the data, we can delete the download files:
+
+```{r delete_data}
+# delete all download data1 from current directory
+unlink(untarPath1, recursive = TRUE)
+
+# delete all download data2 from current directory
+unlink(untarPath2, recursive = TRUE)
+```
+
+### step 2: compute differential expression data for each study
+With the data being cleaned and annotated, we can now compute the gene differnetial expression/expressional fold change.
+
+```{r logFC_data1}
+# class is the 
+class <- c("mutant", "control","mutant", "control","mutant", "control",
+     "mutant", "control","mutant", "control","mutant", "control", "mutant",
+     "control","mutant", "control","mutant", "control", "mutant", "control")
+result1 <- logFCsingle(data1, class)
+
+```
+
+
+```{r}
+sessionInfo()
+```

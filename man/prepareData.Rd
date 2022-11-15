@@ -76,4 +76,8 @@ Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K,
 Vaughan D, Wilke C, Woo K, Yutani H (2019). “Welcome to the tidyverse.”
 \emph{Journal of Open Source Software}, \emph{4}(43), 1686.
 doi:10.21105/joss.01686 \url{https://doi.org/10.21105/joss.01686}.
+
+Wickham H, François R, Henry L, Müller K (2022).
+\emph{dplyr: A Grammar of Data Manipulation}.
+R package version 1.0.10, \url{https://CRAN.R-project.org/package=dplyr}.
 }

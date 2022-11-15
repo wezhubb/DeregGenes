@@ -96,4 +96,8 @@ plotHeatMap(data.frame(aggreg[3]), 4, 6)
 \references{
 Kolde R (2019). \emph{pheatmap: Pretty Heatmaps}.
 R package version 1.0.12, \url{https://CRAN.R-project.org/package=pheatmap}.
+
+Wickham H, François R, Henry L, Müller K (2022).
+\emph{dplyr: A Grammar of Data Manipulation}.
+R package version 1.0.10, \url{https://CRAN.R-project.org/package=dplyr}.
 }

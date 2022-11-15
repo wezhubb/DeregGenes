@@ -21,8 +21,13 @@
 #'     than 1. Notice that n must be smaller or equal the number of genes that
 #'     are down-regulated in data.
 #'
-#' @references Kolde R (2019). _pheatmap: Pretty Heatmaps_.
+#' @references
+#' Kolde R (2019). _pheatmap: Pretty Heatmaps_.
 #'     R package version 1.0.12, <https://CRAN.R-project.org/package=pheatmap>.
+#'
+#' Wickham H, François R, Henry L, Müller K (2022).
+#'     _dplyr: A Grammar of Data Manipulation_.
+#'     R package version 1.0.10, <https://CRAN.R-project.org/package=dplyr>.
 #'
 #' @examples
 #' # Require download of about 300MB file.
