@@ -1,3 +1,9 @@
+# Purpose: logFCsingle function
+# Author: Wenzhu Ye
+# Date: 11.15.2022
+# Version: 1.0.0
+# Bugs and Issues: N/A
+
 #' computing gene differential expression across one study
 #'
 #' logFCsingle is a function to analyze the gene expression data to find
@@ -65,12 +71,12 @@
 #' @import impute
 
 logFCsingle <- function(expressionLevel, setUp) {
-  # --- impute missing expression data ---
+  # --- impute missing expression data -----------------
   mat <- impute.knn(expressionLevel)
   rt <- mat$data
   rt <- avereps(rt)
 
-  # --- drawing fit linear model ---
+  # --- drawing fit linear model -----------------
   design <- model.matrix(~ 0 + factor(setUp))
   colnames(design) <- c("mutant","control")
   fit <- lmFit(rt, design)
@@ -78,8 +84,8 @@ logFCsingle <- function(expressionLevel, setUp) {
   fit2 <- contrasts.fit(fit, cont.matrix)
   fit2 <- eBayes(fit2)
 
-  return
   return(topTable(fit2, adjust = 'fdr', number = nrow(expressionLevel)))
 }
 
+# [ END]
 

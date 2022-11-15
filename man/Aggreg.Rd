@@ -10,16 +10,19 @@ Aggreg(listLogFC, listTitle, padj = 0.01, logFC = 1)
 \item{listLogFC}{A vector of all the studies gene differential expression
 data. For each study's data, the format should be in data frame, and
 each row represent different genes(with the gene symbol as its row
-name). The first should be the expressional change(logFC)}
+name). The first should be the expressional change(logFC). The length of
+this list should be at least 2 for the purpose of this function}
 
 \item{listTitle}{A vector of strings. The length of listTile should be the
 same of the length of the listLogFC. listTile should consist of the
 title/name of the studies as in the same orders of the studies in
 listLogFC}
 
-\item{padj}{A numeric vector that represent the adjust p value threshold}
+\item{padj}{A numeric vector that represent the adjust p value threshold,
+if nothing is entered, the default value of 0.01 will be used.}
 
-\item{logFC}{A numeric vector that represent the logFC threshold}
+\item{logFC}{A numeric vector that represent the logFC threshold, if
+nothing is entered, the default value of 1 will be used.}
 }
 \value{
 Return a list of length three. The first element of the list is
@@ -29,7 +32,8 @@ first two data frame, each row a a different genes, and there will be
 four columns: gene symbol(Name), p value(Pvalue), adjust p
 value(adjPvalue), and expressional change(logFC). The last element of
 the list is a aggregated data frame where each row is a gene,
-and each column is the logFC of different studies.
+and each column is the logFC of different studies. If error occurs,
+-1 will be returned.
 }
 \description{
 Aggreg is a function to aggregate different gene expression fold changes
@@ -89,7 +93,7 @@ unlink(untarPath, recursive = TRUE)
 # analysis
 listLogFC <- list(result, result2)
 listTitle <- c("GSE29721", "GSE84402")
-aggreg <- Aggreg(listLogFC, listTitle)
+aggreg <- Aggreg(listLogFC, listTitle, padj = 0.01, logFC = 1)
 
 }
 

@@ -29,7 +29,7 @@ library(GEOquery)
 
 ## Introduction
 
-The main objective of **DeregGenes** is to find genes that are deregulated(up-regulate and down- regulate) in different diseases. This package could also allow users to put different results together to generate a heatmap for cross studies analysis by function __*prepareData*__ . It improves users’ time on massive data cleaning and data annotating processes prior to the analysis since different data prepared by different platforms will need to be handled by different tools. This package also allows user to compute gene differential expression data for single study using function __*logFCsingle*__. Moreover, the function __*Aggreg*__ provides a simple way to let users get a summarised result across multiple current studies data to provide them with a more confident result and conclusion. Also, using this package will save users time to switch back and forth between different distinct packages and learn different documentation since the different packages will require different input data types which is not available on any current published r package. Lastly, the package can generate heat maps of gene differential expression across stuides using function __*plotHeatMap*__.
+The main objective of **DeregGenes** is to find genes that are deregulated(up-regulate and down-regulate) in different diseases. This package could also allow users to put different results together to generate a heatmap for cross studies analysis by function __*prepareData*__ . It improves users’ time on massive data cleaning and data annotating processes prior to the analysis since different data prepared by different platforms will need to be handled by different tools. This package also allows user to compute gene differential expression data for single study using function __*logFCsingle*__. Moreover, the function __*Aggreg*__ provides a simple way to let users get a summarised result across multiple current studies data to provide them with a more confident result and conclusion. Also, using this package will save users time to switch back and forth between different distinct packages and learn different documentation since the different packages will require different input data types which is not available on any current published r package. Lastly, the package can generate heat maps of gene differential expression across stuides using function __*plotHeatMap*__.
 
 See `help(package = "DeregGenes")` for further details and references provided by `citation("DeregGenes")`. To download **DeregGenes**, use the following commands:
 
@@ -45,7 +45,7 @@ lsf.str("package:DeregGenes")
 ```
 
 ## Workflow
-In the following session, I will demonstated the use of **DeregGenes** by analysis of gene expression data from GEO GSE84402 and GSE29721. 
+In the following session, I will demonstated the use of **DeregGenes** by analysis of gene expression data from two GEO data: GSE84402 and GSE29721. 
 
 ### step 1: preparing and annotating data 
 Before the formal analysis, it is important to clean the data by removing NULL value, and annotate data by convert the porbe ID/gene ID to universal HGNC gene symbols. The reason for preparing and annotating data is to make any further analysis easier to perform.
@@ -80,7 +80,15 @@ unlink(paste(untarPath2, '/*.tar', sep = ''))
 
 ```
 
-Prepare data:
+We will then preparing data with __*prepareData*__ function:
+
+__*prepareData*__ is a function used to clean and annotate the data, including handling raw CEL format data, putting together different individual samples into a table, converting different gene IDs and probe IDs to universal HGNC gene symbols, and joining different tables. This function will create a data matrix in which each row represent different gene(with the gene symbol in its rowname), and each column represent different gene's expression level in different sample. 
+
+This function takes two inputs. 
+
+The first input takes a string of the file path to local directory in which that directory only contain CEL gene expression level format data. Notice in order to fulfill the purpose of this analysis, all the sample data from the celpath directory will be from the same study.
+
+The second input take a boolean/logical vector represent the platform of the sample being prepared. This function will work on two platfrom: Affymetrix and Entrez. If the data is prepared by Affymetrix, then enter TRUE, otherwise, enter FALSE.
 
 ```{r prepare_data}
 # preparing data1
@@ -105,7 +113,15 @@ unlink(untarPath2, recursive = TRUE)
 ```
 
 ### step 2: compute differential expression data for each study
-With the data being cleaned and annotated, we can now compute the gene differnetial expression/expressional fold change.
+With the data being cleaned and annotated, we can now compute the gene differnetial expression/expressional fold change using __*logFCsingle*__ function.
+
+__*logFCsingle*__ is a function to analyze the gene expression data to find gene expression fold change/gene differential expression for each gene in a single study. This function will create a data frame where each row represent different genes, and six columns that gives expressional change(logFC), average expression(AveExpr), t value(t), p value(P.Value), adjusted p value(adj.P.Val), and log-odd ratio/B-statistic(B).
+
+This function takes two inputs. 
+
+The first input takes a data matrix of gene expression level data, where each row represent different gene and each column represent different gene's expression level in different sample
+
+The second input take a vector in which the length equals to the number of column in expressionLevel. This vector will be consist of only two strings "mutant" and "control", the "mutant" represent disease sample and "control" represent healthy individual sample. The two strings are organized in the same order of the columns in expressionLevel. For example, if the first five samples in expressionLevel are disease, disease, healthy, disease, healthy. Then the setUp inputed will be c("mutant", "mutant", "control", "mutant", "control")
 
 Compute differential expression for GSE29721
 
@@ -136,7 +152,19 @@ head(result2)
 
 ### step 3: Aggregate differential expression from GSE29721 and GSE84402
 
-With the single study differential expression data with fold change, we need to aggregate them together to find each genes overall performance across all studies.
+With the single study differential expression data with fold change, we need to aggregate them together to find each genes overall performance across all studies using __*Aggreg*__ function.
+
+__*Aggreg*__ is a function to aggregate different gene expression fold changes across different studies. This function will create a list of length three. The first element of the list is a data frame of up-regulated differential genes. The second element of the list is a data frame of down-regulated differential genes. For the first two data frame, each row a a different genes, and there will be four columns: gene symbol(Name), p value(Pvalue), adjust p value(adjPvalue), and expressional change(logFC). The last element of the list is a aggregated data frame where each row is a gene, and each column is the logFC of different studies.
+
+This function takes four inputs. 
+
+The first input takes a vector of all the studies gene differential expression data. For each study's data, the format should be in data frame, and each row represent different genes(with the gene symbol as its row name). The first should be the expressional change(logFC)
+
+The second input take a vector of strings. The length of listTile should be the same of the length of the listLogFC. listTile should consist of the title/name of the studies as in the same orders of the studies in listLogFC
+
+The third input take a numeric vector that represent the adjust p value threshold, if nothing is entered, the default value of 0.01 will be used.
+
+The fourth input take a numeric vector that represent the logFC threshold, if  nothing is entered, the default value of 1 will be used.
 
 ```{r aggregate}
 # create list of input  data
@@ -155,7 +183,17 @@ head(aggreg[3])
 ```
 
 ### step 4: drawing heat map
-With the aggregate data, we can draw the heatmap now.
+With the aggregate data, we can draw the heatmap now using __*plotHeatMap*__ function.
+
+__*plotHeatMap*__ is a function to draw a heatmap representation of differential gene expression corss different studies. Notice that this function will not return the heatmap, but will stored the heat map in local directory.
+
+This function takes three inputs. 
+
+The first input takes a dataframe where each row is a gene(row name is the gene symbol),and each column is the logFC of different studies(column name is the study name). The data frame must be in order, where the gene with highest logFC value acorss all studies should be at the top, and the gene with lowest logFC value acorss all studies should be at the bottom
+
+The second input take a numeric vector indicate the top n numbers of genes with significant logFC values from up-regulated data. This number must bigger than 1. Notice that n must be smaller or equal the number of genes that are up-regulated in data.
+
+The third input take a numeric vector indicate the top n numbers of genes with significant logFC values from down-regulated data. This number must bigger than 1. Notice that n must be smaller or equal the number of genes that are down-regulated in data.
 
 Notice that the comment below will not be execute here since the purpose of the following function is to store the generated heat map in your local directory and return NULL. The heatmap for the previous example generated by this function is attached below. 
 
@@ -163,7 +201,7 @@ Notice that the comment below will not be execute here since the purpose of the 
 # plotHeatMap(data.frame(aggreg[3]), 4, 6)
 
 ```
-![](../inst/extdata/logFC.jpg) { width=100% }
+![](../inst/extdata/logFC.jpg) { width=35% }
 
 
 ## References

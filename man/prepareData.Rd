@@ -42,7 +42,8 @@ filePaths <- getGEOSuppFiles("GSE29721")
 
 # untar downloaded data and delete tar file
 untarPath <- strsplit(row.names(filePaths), '/')
-untarPath <- paste(untarPath[[1]][1:length(untarPath[[1]]) - 1], collapse="/")
+untarPath <- paste(untarPath[[1]][1:length(untarPath[[1]]) - 1],
+    collapse="/")
 untar(row.names(filePaths), exdir = untarPath)
 unlink(paste(untarPath, '/*.tar', sep = ''))
 

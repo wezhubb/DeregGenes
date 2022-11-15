@@ -1,3 +1,9 @@
+# Purpose: plotHeatMap function
+# Author: Wenzhu Ye
+# Date: 11.15.2022
+# Version: 1.0.0
+# Bugs and Issues: N/A
+
 #' drawing heatmap of gene differential expression data
 #'
 #' plotHeatMap is a function used to draw a heatmap representation of
@@ -119,7 +125,6 @@ plotHeatMap <- function(data, nUp, nDown) {
   }
 
   hminput <- data
-  # hminput <- data %>% filter(row_number() <= nUp | row_number() > nrow(data) - nDown)
 
   w <- ncol(hminput)
   h <- nrow(hminput)
@@ -133,6 +138,7 @@ plotHeatMap <- function(data, nUp, nDown) {
        bg = "white",
        res = 400)
 
+  # plot heatmap
   pheatmap(hminput,
            display_numbers = TRUE,
            fontsize_row = 10,
@@ -141,8 +147,11 @@ plotHeatMap <- function(data, nUp, nDown) {
            cluster_cols = FALSE,
            cluster_rows = FALSE, )
 
+  # reset plot device
   par()
   dev.off()
 
   return(1)
 }
+
+# [ END]

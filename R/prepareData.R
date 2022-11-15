@@ -1,3 +1,9 @@
+# Purpose: prepareData function
+# Author: Wenzhu Ye
+# Date: 11.15.2022
+# Version: 1.0.0
+# Bugs and Issues: N/A
+
 #' preparing CEL data for furthe gene differential expression analysis
 #'
 #' prepareData is a function used to clean and annotate the data,
@@ -63,7 +69,8 @@
 #'
 #' # untar downloaded data and delete tar file
 #' untarPath <- strsplit(row.names(filePaths), '/')
-#' untarPath <- paste(untarPath[[1]][1:length(untarPath[[1]]) - 1], collapse="/")
+#' untarPath <- paste(untarPath[[1]][1:length(untarPath[[1]]) - 1],
+#'     collapse="/")
 #' untar(row.names(filePaths), exdir = untarPath)
 #' unlink(paste(untarPath, '/*.tar', sep = ''))
 #'
@@ -82,15 +89,15 @@
 #'
 
 prepareData <- function(celpath, isAffymetrix = TRUE) {
-  # --- load in data ---
-  list <- list.files(celpath,full.names=TRUE)
+  # --- load in data -----------------
+  list <- list.files(celpath, full.names=TRUE)
   data <- read.celfiles(list)
 
-  # -- normalize data --
+  # --- normalize data -----------------
   data.rma <- rma(data)
   data.matrix <- exprs(data.rma)
 
-  # --- annotate probeID to gene symbol ---
+  # --- annotate probeID to gene symbol -----------------
   rowName <- row.names(data.matrix)
 
   ensembl <- useEnsembl(biomart = "genes", dataset = "hsapiens_gene_ensembl")
@@ -108,7 +115,7 @@ prepareData <- function(celpath, isAffymetrix = TRUE) {
               values = rowName,
               mart = ensembl)
 
-  gN <- subset(gN, hgnc_symbol!='')
+  gN <- subset(gN, hgnc_symbol!= '')
 
   # delete data that the gene ID/peobe ID that have no corresponding gene symbol
   probelist <- as.list(gN$affy_hg_u133_plus_2)
@@ -139,3 +146,5 @@ prepareData <- function(celpath, isAffymetrix = TRUE) {
   return(data.matrix)
 
 }
+
+# [ END]
