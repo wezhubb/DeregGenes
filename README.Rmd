@@ -18,41 +18,33 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of DeregGenes is to ...
+## Description
+
+The main objective of DeregGenes is to find genes that are deregulated(up-regulate and down- regulate) in different diseases. This package could also allow users to put different results together to generate a heatmap for cross studies analysis. It improves users’ time on massive data cleaning and data annotating processes prior to the analysis since different data prepared by different platforms will need to be handled by different tools. Moreover, this package provides a simple way to let users get a summarised result across multiple current studies data to provide them with a more confident result and conclusion. Also, using this package will save users time to switch back and forth between different distinct packages and learn different documentation since the different packages will require different input data types which is not available on any current published r package.
+
+R requirement: 4.2.0 or later version
+Development platform: Mac
 
 ## Installation
 
 You can install the development version of DeregGenes from [GitHub](https://github.com/) with:
 
-``` r
-# install.packages("devtools")
-devtools::install_github("wezhubb/DeregGenes")
+``` {r}
+require("devtools")
+devtools::install_github("wezhubb/DeregGenes", build_vignettes = TRUE)
+library("DeregGenes")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
-## library(DeregGenes)
-## basic example code
+## Overview
+``` {r overview}
+#ls("package:DeregGenes")
+browseVignettes("DeregGenes")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+## Contributions
 
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+## Acknowledgements
+This package was developed as part of an assessment for 2022f BCB410H: Applied Bioinformatics, University of Toronto, Toronto, Canada.
 
 ## References
 Gautier, L., Cope, L., Bolstad, B. M., and Irizarry, R. A. 2004. affy---analysis of Affymetrix GeneChip data at the probe level. Bioinformatics 20, 3 (Feb. 2004), 307-315.

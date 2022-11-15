@@ -6,7 +6,23 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of DeregGenes is to …
+## Description
+
+The main objective of DeregGenes is to find genes that are
+deregulated(up-regulate and down- regulate) in different diseases. This
+package could also allow users to put different results together to
+generate a heatmap for cross studies analysis. It improves users’ time
+on massive data cleaning and data annotating processes prior to the
+analysis since different data prepared by different platforms will need
+to be handled by different tools. Moreover, this package provides a
+simple way to let users get a summarised result across multiple current
+studies data to provide them with a more confident result and
+conclusion. Also, using this package will save users time to switch back
+and forth between different distinct packages and learn different
+documentation since the different packages will require different input
+data types which is not available on any current published r package.
+
+R requirement: 4.2.0 or later version Development platform: Mac
 
 ## Installation
 
@@ -14,45 +30,58 @@ You can install the development version of DeregGenes from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("wezhubb/DeregGenes")
+require("devtools")
+#> Loading required package: devtools
+#> Loading required package: usethis
+devtools::install_github("wezhubb/DeregGenes", build_vignettes = TRUE)
+#> Downloading GitHub repo wezhubb/DeregGenes@HEAD
+#> Skipping 5 packages not available: limma, oligo, impute, biomaRt, affy
+#> * checking for file ‘/private/var/folders/8j/xj1c7l6s505b2r61h7_hktsw0000gn/T/RtmpHIVBry/remotes951a81b5dca/wezhubb-DeregGenes-dd98f5d/DESCRIPTION’ ... OK
+#> * preparing ‘DeregGenes’:
+#> * checking DESCRIPTION meta-information ... OK
+#> * checking for LF line-endings in source and make files and shell scripts
+#> * checking for empty or unneeded directories
+#> Omitted ‘LazyData’ from DESCRIPTION
+#> * building ‘DeregGenes_0.1.0.tar.gz’
+library("DeregGenes")
+#> Warning: replacing previous import 'affy::mm<-' by 'oligo::mm<-' when loading
+#> 'DeregGenes'
+#> Warning: replacing previous import 'limma::backgroundCorrect' by
+#> 'oligo::backgroundCorrect' when loading 'DeregGenes'
+#> Warning: replacing previous import 'affy::mmindex' by 'oligo::mmindex' when
+#> loading 'DeregGenes'
+#> Warning: replacing previous import 'affy::pm' by 'oligo::pm' when loading
+#> 'DeregGenes'
+#> Warning: replacing previous import 'affy::probeNames' by 'oligo::probeNames'
+#> when loading 'DeregGenes'
+#> Warning: replacing previous import 'affy::rma' by 'oligo::rma' when loading
+#> 'DeregGenes'
+#> Warning: replacing previous import 'affy::intensity' by 'oligo::intensity' when
+#> loading 'DeregGenes'
+#> Warning: replacing previous import 'affy::MAplot' by 'oligo::MAplot' when
+#> loading 'DeregGenes'
+#> Warning: replacing previous import 'affy::pmindex' by 'oligo::pmindex' when
+#> loading 'DeregGenes'
+#> Warning: replacing previous import 'affy::pm<-' by 'oligo::pm<-' when loading
+#> 'DeregGenes'
+#> Warning: replacing previous import 'affy::mm' by 'oligo::mm' when loading
+#> 'DeregGenes'
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+## Overview
 
 ``` r
-## library(DeregGenes)
-## basic example code
+#ls("package:DeregGenes")
+browseVignettes("DeregGenes")
+#> No vignettes found by browseVignettes("DeregGenes")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+## Contributions
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
+## Acknowledgements
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+This package was developed as part of an assessment for 2022f BCB410H:
+Applied Bioinformatics, University of Toronto, Toronto, Canada.
 
 ## References
 

@@ -12,9 +12,10 @@ directory only contain CEL gene expression level format data. Notice in
 order to fulfill the purpose of this analysis, all the sample data from
 the celpath directory will be from the same study.}
 
-\item{isAffymetrix}{A boolean represent the platform of the sample being
-prepared. This function will work on two platfrom: Affymetrix and Entrez. If
-the data is prepared by Affymetrix, then enter TRUE, otherwise, enter FALSE.}
+\item{isAffymetrix}{A boolean/logical vector represent the platform of the
+sample being prepared. This function will work on two platfrom:
+Affymetrix and Entrez. If the data is prepared by Affymetrix, then
+enter TRUE, otherwise, enter FALSE.}
 }
 \value{
 return a data matrix of cleaned and organized data.
@@ -32,6 +33,26 @@ expression level in different sample.
 This function will remove data with duplicate gene symbol, and remove
 all data that with gene ID/probe ID that could not be converted to gene
 symbol
+}
+\examples{
+# Require download of about 90MB file.
+\dontrun{
+# download data from GEO
+filePaths <- getGEOSuppFiles("GSE29721")
+
+# untar downloaded data and delete tar file
+untarPath <- strsplit(row.names(filePaths), '/')
+untarPath <- paste(untarPath[[1]][1:length(untarPath[[1]]) - 1], collapse="/")
+untar(row.names(filePaths), exdir = untarPath)
+unlink(paste(untarPath, '/*.tar', sep = ''))
+
+# running analysis
+prepareData(untarPath, TRUE)
+
+# delete all download data
+unlink(untarPath, recursive = TRUE)
+}
+
 }
 \references{
 Carvalho B. S., and Irizarry, R. A. 2010. A Framework for Oligonucleotide

@@ -1,65 +1,167 @@
+#' aggregate gene differential expression from different studies together
+#'
+#' Aggreg is a function to aggregate different gene expression fold changes
+#' across different studies. This function will only keep the genes that
+#' all the studies have data of.
+#'
+#' @param listLogFC A vector of all the studies gene differential expression
+#'     data. For each study's data, the format should be in data frame, and
+#'     each row represent different genes(with the gene symbol as its row
+#'     name). The first should be the expressional change(logFC)
+#' @param listTitle A vector of strings. The length of listTile should be the
+#'     same of the length of the listLogFC. listTile should consist of the
+#'     title/name of the studies as in the same orders of the studies in
+#'     listLogFC
+#' @param padj A numeric vector that represent the adjust p value threshold
+#' @param logFC A numeric vector that represent the logFC threshold
+#'
+#' @return Return a list of length three. The first element of the list is
+#'     a data frame of up-regulated differential genes. The second element of
+#'     the list is a data frame of down-regulated differential genes. For the
+#'     first two data frame, each row a a different genes, and there will be
+#'     four columns: gene symbol(Name), p value(Pvalue), adjust p
+#'     value(adjPvalue), and expressional change(logFC). The last element of
+#'     the list is a aggregated data frame where each row is a gene,
+#'     and each column is the logFC of different studies.
+#'
+#' @references
+#' Kolde R (2022). _RobustRankAggreg: Methods for Robust Rank Aggregation_.
+#'     R package version 1.2.1,
+#'     <https://CRAN.R-project.org/package=RobustRankAggreg>.
+#'
+#' @examples
+#' # Require download of about 300MB file.
+#' \dontrun{
+#' # download data1 from GEO
+#' filePaths <- getGEOSuppFiles("GSE29721")
+#'
+#' # untar downloaded data1 and delete tar file
+#' untarPath <- strsplit(row.names(filePaths), '/')
+#' untarPath <- paste(untarPath[[1]][1:length(untarPath[[1]]) - 1],
+#'     collapse="/")
+#' untar(row.names(filePaths), exdir = untarPath)
+#' unlink(paste(untarPath, '/*.tar', sep = ''))
+#'
+#' # preparing data1
+#' data1 <- prepareData(untarPath, TRUE)
+#'
+#' # compute logFC for data1
+#' class <- c("mutant", "control","mutant", "control","mutant", "control",
+#'     "mutant", "control","mutant", "control","mutant", "control", "mutant",
+#'     "control","mutant", "control","mutant", "control", "mutant", "control")
+#' result <- logFCsingle(data1, class)
+#'
+#' # delete all download data1
+#' unlink(untarPath, recursive = TRUE)
+#'
+#' # download data2 from GEO
+#' filePaths <- getGEOSuppFiles("GSE84402")
+#'
+#' # untar downloaded data2 and delete tar file
+#' untarPath <- strsplit(row.names(filePaths), '/')
+#' untarPath <- paste(untarPath[[1]][1:length(untarPath[[1]]) - 1],
+#'     collapse="/")
+#' untar(row.names(filePaths), exdir = untarPath)
+#' unlink(paste(untarPath, '/*.tar', sep = ''))
+#'
+#' # preparing data2
+#' data2 <- prepareData(untarPath, TRUE)
+#'
+#' # compute logFC for data2
+#' class <- c("mutant", "control","mutant", "control","mutant", "control",
+#'     "mutant", "control","mutant", "control","mutant", "control", "mutant",
+#'     "control","mutant", "control","mutant", "control", "mutant", "control",
+#'     "mutant", "control","mutant", "control", "mutant", "control","mutant",
+#'     "control")
+#' result2 <- logFCsingle(data2, class)
+#'
+#' # delete all download data2
+#' unlink(untarPath, recursive = TRUE)
 #'
 #'
+#' # analysis
+#' listLogFC <- list(result, result2)
+#' listTitle <- c("GSE29721", "GSE84402")
+#' aggreg <- Aggreg(listLogFC, listTitle)
 #'
+#' }
 #'
-#'
-#'
+#' @export
 #' @import RobustRankAggreg
 
 
-Aggreg <- function(listLogFC, listTitle, padj = 0, logFC = 0, isUp) {
-  up_list = list()
-  down_list = list()
-  allFCList = list()
+Aggreg <- function(listLogFC, listTitle, padj = 0.01, logFC = 1) {
+  # --- init different list ---
+  up_list <- list()
+  down_list <- list()
+  allFCList <- list()
+
+  # --- put all data in listLogFC into allFCList ---
   for(i in 1:length(listLogFC)) {
-    inputFile = data.frame(listLogFC[i])
+    # prepare input
+    inputFile <- data.frame(listLogFC[i])
     inputFile$gene <- rownames(inputFile)
     inputFile <- inputFile[,c(ncol(inputFile),1:(ncol(inputFile)-1))]
     rt <- inputFile[order(inputFile$logFC),]
-    header = listTitle[i]
-    down_list[[header[1]]] = as.vector(rt[,1])
-    up_list[[header[1]]] = rev(as.vector(rt[,1]))
-    fcCol = rt[,1:2]
-    colnames(fcCol) = c('GENE', header[[1]])
-    allFCList[[header[1]]] = fcCol
+    header <- listTitle[i]
+
+    # prepare down_list and up_list
+    down_list[[header[[1]][1]]] <- as.vector(rt[,1])
+    up_list[[header[[1]][1]]] <- rev(as.vector(rt[,1]))
+
+    fcCol <- rt[,1:2]
+    colnames(fcCol) <- c('GENE', header[[1]])
+    allFCList[[header[[1]][1]]] <- fcCol
   }
 
-  newTab = Reduce(mergeLe, allFCList)
-  rownames(newTab) = newTab[,1]
-  newTab = newTab[,2:ncol(newTab)]
-  newTab[is.na(newTab)] = 0
+  # --- merge list ---
+  newTab <- Reduce(function(x,y) merge(x,y,by = "GENE", all = T), allFCList)
+  rownames(newTab) <- newTab[,1]
+  newTab <- newTab[,2:ncol(newTab)]
+  # remove NA
+  newTab[is.na(newTab)] <- 0
 
-  if (isUp) {
-    upMatrix = RobustRankAggreg::rankMatrix(up_list)
-    upAR = aggregateRanks(rmat = upMatrix)
-    colnames(upAR) = c("Name", "Pvalue")
-    upAdj = p.adjust(upAR$Pvalue, method = "bonferroni")
-    upXls = cbind(upAR, adjPvalue = upAdj)
-    upFC = newTab[as.vector(upXls[,1]),]
-    upXls = cbind(upXls, logFC = rowMeans(upFC))
-    upSig = upXls[(upXls$adjPvalue<padj & upXls$logFC>logFC),]
+  # --- give significant up-regulated genes ---
+  # prepare
+  upMatrix <- RobustRankAggreg::rankMatrix(up_list)
+  upAR <- aggregateRanks(rmat = upMatrix)
+  colnames(upAR) <- c("Name", "Pvalue")
 
-    return(upSig)
+  # adjust p value
+  upAdj <- p.adjust(upAR$Pvalue, method = "bonferroni")
 
-  } else {
-    downMatrix = RobustRankAggreg::rankMatrix(down_list)
-    downAR = aggregateRanks(rmat = downMatrix)
-    colnames(downAR) = c("Name", "Pvalue")
-    downAdj = p.adjust(downAR$Pvalue, method = "bonferroni")
-    downXls = cbind(downAR, adjPvalue = downAdj)
-    downFC = newTab[as.vector(downXls[,1]),]
-    downXls = cbind(downXls, logFC = rowMeans(downFC))
-    downSig = downXls[(downXls$adjPvalue<padj & downXls$logFC< -logFC),]
+  # bind tables
+  upXls <- cbind(upAR, adjPvalue = upAdj)
+  upFC <- newTab[as.vector(upXls[,1]),]
 
-    return(downSig)
+  # all genes
+  upXls <- cbind(upXls, logFC = rowMeans(upFC))
 
-  }
+  # select out significant up-regulated genes
+  upSig <- upXls[(upXls$adjPvalue<padj & upXls$logFC>logFC),]
 
+  # --- give significant down-regulated genes ---
+  # prepare
+  downMatrix <- RobustRankAggreg::rankMatrix(down_list)
+  downAR <- aggregateRanks(rmat = downMatrix)
+  colnames(downAR) <- c("Name", "Pvalue")
 
+  # adjust p value
+  downAdj <- p.adjust(downAR$Pvalue, method = "bonferroni")
 
+  # bind tables
+  downXls <- cbind(downAR, adjPvalue = downAdj)
+  downFC <- newTab[as.vector(downXls[,1]),]
+
+  # all genes
+  downXls <- cbind(downXls, logFC = rowMeans(downFC))
+
+  # select out significant down-regulated genes
+  downSig <- downXls[(downXls$adjPvalue<padj & downXls$logFC< -logFC),]
+
+  hminput = newTab[c(as.vector(upSig[1:nrow(upSig),1]), as.vector(downSig[1:nrow(downSig),1])),]
+
+  return(list(upSig, downSig, hminput))
 
 }
 
-mergeLe = function(x,y) {
-  merge(x,y,by = "Gene", all = T)
-}

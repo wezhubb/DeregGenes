@@ -16,10 +16,10 @@
 #'     directory only contain CEL gene expression level format data. Notice in
 #'     order to fulfill the purpose of this analysis, all the sample data from
 #'     the celpath directory will be from the same study.
-#'
-#' @param isAffymetrix A boolean represent the platform of the sample being
-#'     prepared. This function will work on two platfrom: Affymetrix and Entrez. If
-#'     the data is prepared by Affymetrix, then enter TRUE, otherwise, enter FALSE.
+#' @param isAffymetrix A boolean/logical vector represent the platform of the
+#'     sample being prepared. This function will work on two platfrom:
+#'     Affymetrix and Entrez. If the data is prepared by Affymetrix, then
+#'     enter TRUE, otherwise, enter FALSE.
 #'
 #' @return return a data matrix of cleaned and organized data.
 #'
@@ -47,7 +47,7 @@
 #'     _Journal of Open Source Software_, *4*(43), 1686.
 #'     doi:10.21105/joss.01686 <https://doi.org/10.21105/joss.01686>.
 #'
-#' @example
+#' @examples
 #' # Require download of about 90MB file.
 #' \dontrun{
 #' # download data from GEO
