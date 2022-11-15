@@ -15,11 +15,14 @@ Roxygen: list(markdown = TRUE)
 Depends: R (>= 4.2.0)
 Imports: 
     affy (>= 1.74.0),
+    biomaRt,
     impute,
+    oligo,
     limma (>= 3.52.0),
     pheatmap (>= 1.0.12),
     RobustRankAggreg (>= 1.2.1)
 Suggests: 
     rmarkdown,
     knitr,
+    GEOquery,
     testthat (>= 3.0.0)
