@@ -122,7 +122,12 @@ prepareData <- function(celpath, isAffymetrix = TRUE) {
   gN <- subset(gN, hgnc_symbol!= '')
 
   # delete data that the gene ID/peobe ID that have no corresponding gene symbol
-  probelist <- as.list(gN$affy_hg_u133_plus_2)
+  if (isAffymetrix) {
+    probelist <- as.list(gN$affy_hg_u133_plus_2)
+  } else {
+    probelist <- as.list(gN$entrezgene_id)
+  }
+
   rowToDelete <- c()
 
   for (item in rowName) {
