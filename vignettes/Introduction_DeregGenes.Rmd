@@ -52,7 +52,7 @@ data(package = "DeregGenes")
 ## Workflow
 In the following session, I will demonstated the use of **DeregGenes** by analysis of gene expression data from two GEO data: GSE84402 and GSE29721. 
 
-### step 1: preparing and annotating data 
+### Step 1: Preparing and annotating data 
 Before the formal analysis, it is important to clean the data by removing NULL value, and annotate data by convert the porbe ID/gene ID to universal HGNC gene symbols. The reason for preparing and annotating data is to make any further analysis easier to perform.
 
 To download the data in current directory:
@@ -85,11 +85,10 @@ The first input takes a string of the file path to local directory in which that
 
 The second input take a boolean/logical vector represent the platform of the sample being prepared. This function will work on two platfrom: Affymetrix and Entrez. If the data is prepared by Affymetrix, then enter TRUE, otherwise, enter FALSE.
 
-```r prepare_data
+``` r
 # preparing data
 data <- prepareData(untarPath, TRUE)
 head(data)
-
 ```
 
 ```{r echo=FALSE}
@@ -103,7 +102,7 @@ After finishing the preparing process and stored the data, we can delete the dow
 unlink(untarPath, recursive = TRUE)
 ```
 
-### step 2: compute differential expression data for each study
+### Step 2: Compute differential expression data for each study
 With the data being cleaned and annotated, we can now compute the gene differnetial expression/expressional fold change using __*logFCsingle*__ function.
 
 __*logFCsingle*__ is a function to analyze the gene expression data to find gene expression fold change/gene differential expression for each gene in a single study. This function will create a data frame where each row represent different genes, and six columns that gives expressional change(logFC), average expression(AveExpr), t value(t), p value(P.Value), adjusted p value(adj.P.Val), and log-odd ratio/B-statistic(B).
@@ -142,7 +141,7 @@ result2 <- logFCsingle(GSE84402, class)
 head(result2)
 ```
 
-### step 3: Aggregate differential expression from GSE29721 and GSE84402
+### Step 3: Aggregate differential expression from GSE29721 and GSE84402
 
 With the single study differential expression data with fold change, we need to aggregate them together to find each genes overall performance across all studies using __*Aggreg*__ function.
 
@@ -174,7 +173,7 @@ head(aggreg[3])
 
 ```
 
-### step 4: drawing heat map
+### Step 4: Drawing heat map
 With the aggregate data, we can draw the heatmap now using __*plotHeatMap*__ function.
 
 __*plotHeatMap*__ is a function to draw a heatmap representation of differential gene expression corss different studies. Notice that this function will not return the heatmap, but will stored the heat map in local directory.
