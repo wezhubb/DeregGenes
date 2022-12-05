@@ -41,42 +41,12 @@ across different studies. This function will only keep the genes that
 all the studies have data of.
 }
 \examples{
-# Require download of about 300MB file.
 \dontrun{
-# download data1 from GEO
-filePaths <- getGEOSuppFiles("GSE29721")
-
-# untar downloaded data1 and delete tar file
-untarPath <- strsplit(row.names(filePaths), '/')
-untarPath <- paste(untarPath[[1]][1:length(untarPath[[1]]) - 1],
-    collapse="/")
-untar(row.names(filePaths), exdir = untarPath)
-unlink(paste(untarPath, '/*.tar', sep = ''))
-
-# preparing data1
-data1 <- prepareData(untarPath, TRUE)
-
 # compute logFC for data1
 class <- c("mutant", "control","mutant", "control","mutant", "control",
     "mutant", "control","mutant", "control","mutant", "control", "mutant",
     "control","mutant", "control","mutant", "control", "mutant", "control")
-result <- logFCsingle(data1, class)
-
-# delete all download data1
-unlink(untarPath, recursive = TRUE)
-
-# download data2 from GEO
-filePaths <- getGEOSuppFiles("GSE84402")
-
-# untar downloaded data2 and delete tar file
-untarPath <- strsplit(row.names(filePaths), '/')
-untarPath <- paste(untarPath[[1]][1:length(untarPath[[1]]) - 1],
-    collapse="/")
-untar(row.names(filePaths), exdir = untarPath)
-unlink(paste(untarPath, '/*.tar', sep = ''))
-
-# preparing data2
-data2 <- prepareData(untarPath, TRUE)
+result <- logFCsingle(GSE29721, class)
 
 # compute logFC for data2
 class <- c("mutant", "control","mutant", "control","mutant", "control",
@@ -84,11 +54,7 @@ class <- c("mutant", "control","mutant", "control","mutant", "control",
     "control","mutant", "control","mutant", "control", "mutant", "control",
     "mutant", "control","mutant", "control", "mutant", "control","mutant",
     "control")
-result2 <- logFCsingle(data2, class)
-
-# delete all download data2
-unlink(untarPath, recursive = TRUE)
-
+result2 <- logFCsingle(GSE84402, class)
 
 # analysis
 listLogFC <- list(result, result2)

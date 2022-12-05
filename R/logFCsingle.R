@@ -41,33 +41,17 @@
 #'     2011 Sep 1;71(17):5891-903. PMID: 21747116
 #'
 #' @examples
-#' # Require download of about 90MB file.
 #' \dontrun{
-#' # download data from GEO
-#' filePaths <- getGEOSuppFiles("GSE29721")
-#'
-#' # untar downloaded data and delete tar file
-#' untarPath <- strsplit(row.names(filePaths), '/')
-#' untarPath <- paste(untarPath[[1]][1:length(untarPath[[1]]) - 1],
-#'     collapse="/")
-#' untar(row.names(filePaths), exdir = untarPath)
-#' unlink(paste(untarPath, '/*.tar', sep = ''))
-#'
-#' # preparing data
-#' data <- prepareData(untarPath, TRUE)
-#'
-#' # analysis
+#' # sample type, for more information, run ?GSE29721
 #' class <- c("mutant", "control","mutant", "control","mutant", "control",
 #'     "mutant", "control","mutant", "control","mutant", "control", "mutant",
 #'     "control","mutant", "control","mutant", "control", "mutant", "control")
-#' logFCsingle(data, class)
 #'
-#' # delete all download data
-#' unlink(untarPath, recursive = TRUE)
+#' logFCsingle(GSE29721, class)
 #' }
 #'
 #' @export
-#' @importFrom limma lmFit makeContrasts contrasts.fit eBayes
+#' @import limma
 #' @import impute
 
 logFCsingle <- function(expressionLevel, setUp) {

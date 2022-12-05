@@ -88,7 +88,7 @@
 #' @importFrom oligo read.celfiles rma
 #' @importFrom biomaRt useEnsembl getBM
 #' @import tidyverse
-#' @importFrom dplyr %>%
+#' @import dplyr
 #' @import pd.hg.u133.plus.2
 #'
 
@@ -142,9 +142,11 @@ prepareData <- function(celpath, isAffymetrix = TRUE) {
   # change row names to gene symbols
   for (item in rowName) {
     if (isAffymetrix) {
-      gene <- gN %>% filter(affy_hg_u133_plus_2 == item)
+      gene <- dplyr::filter(gN, affy_hg_u133_plus_2 == item)
+        #gN %>% filter(affy_hg_u133_plus_2 == item)
     } else {
-      gene <- gN %>% filter(entrezgene_id == item)
+      gene <- dplyr::filter(gN, entrezgene_id == item)
+      #gN %>% filter(entrezgene_id == item)
     }
 
     if (nrow(gene) > 0) {
