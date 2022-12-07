@@ -4,7 +4,7 @@
 \name{GSE29721}
 \alias{GSE29721}
 \title{The landscape of promoter DNA hypomethylation in liver cancer
-(expression data)}
+(expression data}
 \format{
 A data frame with columns:
 \describe{
@@ -43,7 +43,7 @@ with HCC from the Chinese National Human Genome Center at Shanghai,
 China (Dr. Ze-Guang Han). For three patients, the cancer samples were
 dissected using the laser capture microdissection technique. Gene
 expression profiles for these patients were generated using Affymetrix
-expression microarrays.
+expression microarrays. The data is in rda format.
 }
 \examples{
 \dontrun{

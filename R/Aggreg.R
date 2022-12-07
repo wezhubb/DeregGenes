@@ -113,7 +113,7 @@ Aggreg <- function(listLogFC, listTitle, padj = 0.01, logFC = 1) {
   # --- give significant up-regulated genes -----------------
   # prepare
   upMatrix <- RobustRankAggreg::rankMatrix(upList)
-  upAR <- aggregateRanks(rmat = upMatrix)
+  upAR <- RobustRankAggreg::aggregateRanks(rmat = upMatrix)
   colnames(upAR) <- c("Name", "Pvalue")
 
   # adjust p value
@@ -132,7 +132,7 @@ Aggreg <- function(listLogFC, listTitle, padj = 0.01, logFC = 1) {
   # --- give significant down-regulated genes -----------------
   # prepare
   downMatrix <- RobustRankAggreg::rankMatrix(downList)
-  downAR <- aggregateRanks(rmat = downMatrix)
+  downAR <- RobustRankAggreg::aggregateRanks(rmat = downMatrix)
   colnames(downAR) <- c("Name", "Pvalue")
 
   # adjust p value
@@ -150,8 +150,6 @@ Aggreg <- function(listLogFC, listTitle, padj = 0.01, logFC = 1) {
 
   hminput <- newTab[c(as.vector(upSig[1:nrow(upSig), 1]),
                       as.vector(downSig[1:nrow(downSig), 1])), ]
-
-  print('a success')
 
   return(list(upSig, downSig, hminput))
 

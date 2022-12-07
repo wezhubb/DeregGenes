@@ -19,13 +19,13 @@
 #'     should be at the top, and the gene with lowest logFC value acorss all
 #'     studies should be at the bottom
 #' @param nUp A numeric vector indicate the top n numbers of genes with
-#'     significant logFC values from up-regulated data. This number must bigger
-#'     than 1. Notice that n must be smaller or equal the number of genes that
-#'     are up-regulated in data.
+#'     significant logFC values from up-regulated data. If both nUp and ndown
+#'     is not given, all of the data will be plot. Notice that n must be
+#'     smaller or equal the number of genes that are up-regulated in data.
 #' @param ndown A numeric vector indicate the top n numbers of genes with
-#'     significant logFC values from down-regulated data. This number must bigger
-#'     than 1. Notice that n must be smaller or equal the number of genes that
-#'     are down-regulated in data.
+#'     significant logFC values from down-regulated data. If both nUp and ndown
+#'     is not given, all of the data will be plot. Notice that n must be
+#'     smaller or equal the number of genes that are down-regulated in data.
 #'
 #' @return This function will return 1 if the function has been executed
 #'     successfully, and return -1 if error occurred
@@ -68,7 +68,7 @@
 #' aggreg <- Aggreg(listLogFC, listTitle, padj = 0.01, logFC = 1)
 #'
 #' # drawing heatmap
-#' plotHeatMap(data.frame(aggreg[3]), 4, 6)
+#' plotHeatMap(data.frame(aggreg[3]))
 #'
 #' }
 #'
@@ -76,36 +76,28 @@
 #' @import pheatmap
 #' @importFrom dplyr %>%
 
-## TODO: finish up error message in part 2
-## TODO: fix tiff bug in part 2
-plotHeatMap <- function(data, nUp, nDown) {
-
-  if (nUp < 0 | nDown < 0) {
-    print("please enter a number greater than 0")
-    return(-1)
-  }
-
+plotHeatMap <- function(data, nUp = -1, nDown = -1) {
+  # -- check if data exist--
   if (missing(data)) {
     print("please enter data")
     return(-1)
   }
 
-  hminput <- data
+  # -- check nUp and nDown value --
 
-  w <- ncol(hminput)
-  h <- nrow(hminput)
-
-  # setting up graph environment
-  #tiff(file = "logFC.tiff",
-  #     width = 15,
-  #     height = 20,
-  #     units = "cm",
-  #     compression = "lzw",
-  #     bg = "white",
-  #     res = 400)
+  if (nUp == -1 && nDown == -1) {
+    hminput <- data
+  } else if (nUp < 0 | nDown < 0) {
+    print("please enter a number greater than 0")
+    return(-1)
+  } else {
+    top <- head(data, 2)
+    bottom <- tail(data, 2)
+    hminput <- rbind(top, bottom)
+  }
 
   # plot heatmap
-  pheatmap(hminput,
+  pheatmap::pheatmap(hminput,
            display_numbers = TRUE,
            units = 'cm',
            fontsize_row = 10,
@@ -114,11 +106,7 @@ plotHeatMap <- function(data, nUp, nDown) {
            cluster_cols = FALSE,
            cluster_rows = FALSE, )
 
-  # reset plot device
-  #par()
-  #dev.off()
-
-  #return(1)
+  return(1)
 }
 
 # [ END]

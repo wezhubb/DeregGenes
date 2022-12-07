@@ -37,6 +37,12 @@ devtools::install_github("wezhubb/DeregGenes", build_vignettes = TRUE)
 library("DeregGenes")
 ```
 
+To run the ShinyApp:
+
+``` r
+DeregGenes::runDeregGenes()
+```
+
 ## Overview
 
 ``` r

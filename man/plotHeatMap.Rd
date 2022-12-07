@@ -4,7 +4,7 @@
 \alias{plotHeatMap}
 \title{drawing heatmap of gene differential expression data}
 \usage{
-plotHeatMap(data, nUp, nDown)
+plotHeatMap(data, nUp = -1, nDown = -1)
 }
 \arguments{
 \item{data}{A dataframe where each row is a gene(row name is the gene
@@ -15,14 +15,14 @@ should be at the top, and the gene with lowest logFC value acorss all
 studies should be at the bottom}
 
 \item{nUp}{A numeric vector indicate the top n numbers of genes with
-significant logFC values from up-regulated data. This number must bigger
-than 1. Notice that n must be smaller or equal the number of genes that
-are up-regulated in data.}
+significant logFC values from up-regulated data. If both nUp and ndown
+is not given, all of the data will be plot. Notice that n must be
+smaller or equal the number of genes that are up-regulated in data.}
 
 \item{ndown}{A numeric vector indicate the top n numbers of genes with
-significant logFC values from down-regulated data. This number must bigger
-than 1. Notice that n must be smaller or equal the number of genes that
-are down-regulated in data.}
+significant logFC values from down-regulated data. If both nUp and ndown
+is not given, all of the data will be plot. Notice that n must be
+smaller or equal the number of genes that are down-regulated in data.}
 }
 \value{
 This function will return 1 if the function has been executed
@@ -58,7 +58,7 @@ listTitle <- c("GSE29721", "GSE84402")
 aggreg <- Aggreg(listLogFC, listTitle, padj = 0.01, logFC = 1)
 
 # drawing heatmap
-plotHeatMap(data.frame(aggreg[3]), 4, 6)
+plotHeatMap(data.frame(aggreg[3]))
 
 }
 

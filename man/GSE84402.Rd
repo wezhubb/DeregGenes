@@ -50,7 +50,8 @@ Total RNA from 14 pairs hepatocellular carcinoma tissues and correponding
 non-cancerous tissues were isolated and purified. Five micrograms of
 total RNA from each sample were used to synthesize double-stranded
 complementary DNA (cDNA), and then amplified and labeled with biotin
-and hybridized to the GeneChip Human Genome U133 Plus 2.0 Array
+and hybridized to the GeneChip Human Genome U133 Plus 2.0 Array. The
+data is in rda format.
 }
 \examples{
 \dontrun{

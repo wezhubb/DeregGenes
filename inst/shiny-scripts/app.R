@@ -3,52 +3,57 @@
 
 library(shiny)
 
+
 ui <- fluidPage(
+  tags$head(tags$style(HTML('* {font-family: "Arial"};'))),
 
   # App title ----
-  titlePanel("DeregGenes"),
+  titlePanel(h1("DeregGenes", align = "center", )),
 
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
 
     # Sidebar panel for inputs ----
     sidebarPanel(
-      width = 10,
+      width = '100%',
+      align = "center",
 
-      tags$p("Heatmap, aggregate anlysis result from inputed data."),
+      tags$p("Display heatmap, aggregate anlysis result from inputed data."),
       br(),
       tags$p("Upload CSV files containing the data from gene differential
-      expression, please refer the format of input to example data
-             )"),
+      expression. The first cloumn of the CSV file should be the gene symbols,
+      and for the rest of the columns, each column should represent the gene
+      expression level for corresponding genes for singel sample. Please refer
+      to the 2 example datasets below from example."),
 
       br(),
 
       # Input files
-      tags$a(href = "https://github.com/wezhubb/DeregGenes/blob/master/inst/shiny-scripts/GSE29721.csv", "Example Dataset 1"),
+      tags$a(href = "https://github.com/wezhubb/DeregGenes/blob/master/inst/extdata/GSE29721.csv", "Example Dataset 1"),
 
       fileInput("input1", "Choose CSV File for gene differential expression data",
                 accept = ".csv"),
 
-      tags$p("Enter input class for above input file(default is given for example dataset 1), please seperate each using comma, no space"),
+      tags$p("Enter input class for above input file(default is given for example dataset 1), please seperate each sample using comma, no space"),
       textAreaInput(inputId = 'class1', label = 'class 1',
                     value = "mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control"),
 
-      tags$a(href="https://github.com/wezhubb/DeregGenes/blob/master/inst/shiny-scripts/GSE84402.csv", "Example Dataset 2"),
+      tags$a(href="https://github.com/wezhubb/DeregGenes/blob/master/inst/extdata/GSE84402.csv", "Example Dataset 2"),
 
       fileInput("input2", "Choose CSV File for gene differential expression data",
                 accept = ".csv"),
 
-      tags$p("Enter input class for above input file(default is given for example dataset 2), please seperate each using comma, no space"),
+      tags$p("Enter input class for above input file(default is given for example dataset 2), please seperate each sample using comma, no space"),
       textAreaInput(inputId = 'class2', label = 'class 2',
                     value = "mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control"),
 
       # Input padj cutoff
       textInput(inputId = "padj",
-                label = "Enter padj cutoff (0 - 1)", "0.01"),
+                label = "Enter padj cutoff (0 - 1, default 0.01)", "0.01"),
 
       # Input logFC cutoff
       textInput(inputId = "logFC",
-                label = "Enter padj cutoff (above 0)", "1"),
+                label = "Enter logFC cutoff (above 0, default 1)", "1"),
 
       # action button
       actionButton(label = "start", inputId = "Start"),
@@ -58,6 +63,9 @@ ui <- fluidPage(
 
     # Main panel for displaying outputs ----
     mainPanel(
+      width = '100%',
+
+      align = "center",
 
       # Output:
       tabsetPanel(type = "tabs",
@@ -114,7 +122,7 @@ server <- function(input, output) {
   # Plotting heatmap plots
   output$heatmap <- renderPlot({
     if (v$dothing == FALSE) return(NULL)
-    DeregGenes::plotHeatMap(data.frame(aggreg()[3]), 4, 6)
+    DeregGenes::plotHeatMap(data.frame(aggreg()[3]))
   })
 
   output$upSig <- renderDataTable({

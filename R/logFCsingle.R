@@ -56,21 +56,19 @@
 
 logFCsingle <- function(expressionLevel, setUp) {
   # --- impute missing expression data -----------------
-  mat <- impute.knn(expressionLevel)
+  mat <- impute::impute.knn(expressionLevel)
   rt <- mat$data
-  rt <- avereps(rt)
+  rt <- limma::avereps(rt)
 
   # --- drawing fit linear model -----------------
   design <- model.matrix(~ 0 + factor(setUp))
   colnames(design) <- c("mutant","control")
-  fit <- lmFit(rt, design)
-  cont.matrix <- makeContrasts(mutant - control, levels = design)
-  fit2 <- contrasts.fit(fit, cont.matrix)
-  fit2 <- eBayes(fit2)
+  fit <- limma::lmFit(rt, design)
+  cont.matrix <- limma::makeContrasts(mutant - control, levels = design)
+  fit2 <- limma::contrasts.fit(fit, cont.matrix)
+  fit2 <- limma::eBayes(fit2)
 
-  print('success')
-
-  return(topTable(fit2, adjust = 'fdr', number = nrow(expressionLevel)))
+  return(limma::topTable(fit2, adjust = 'fdr', number = nrow(expressionLevel)))
 }
 
 # [ END]

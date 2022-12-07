@@ -36,6 +36,7 @@ symbol
 }
 \examples{
 # Require download of about 90MB file.
+# This example's runtime will be around 10 minutes
 \dontrun{
 # download data from GEO
 filePaths <- getGEOSuppFiles("GSE29721")

@@ -1,12 +1,12 @@
 #' The landscape of promoter DNA hypomethylation in liver cancer
-#'     (expression data)
+#'     (expression data
 #'
 #' Cancerous and normal adjacent tissue samples were obtained from 11 patients
 #'     with HCC from the Chinese National Human Genome Center at Shanghai,
 #'     China (Dr. Ze-Guang Han). For three patients, the cancer samples were
 #'     dissected using the laser capture microdissection technique. Gene
 #'     expression profiles for these patients were generated using Affymetrix
-#'     expression microarrays.
+#'     expression microarrays. The data is in rda format.
 #'
 #' @source McGill University, Canada.
 #'
@@ -52,7 +52,8 @@
 #'     non-cancerous tissues were isolated and purified. Five micrograms of
 #'     total RNA from each sample were used to synthesize double-stranded
 #'     complementary DNA (cDNA), and then amplified and labeled with biotin
-#'     and hybridized to the GeneChip Human Genome U133 Plus 2.0 Array
+#'     and hybridized to the GeneChip Human Genome U133 Plus 2.0 Array. The
+#'     data is in rda format.
 #'
 #' @source Shanghai Cancer Insitute, China.
 #'

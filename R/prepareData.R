@@ -66,6 +66,7 @@
 #'
 #' @examples
 #' # Require download of about 90MB file.
+#' # This example's runtime will be around 10 minutes
 #' \dontrun{
 #' # download data from GEO
 #' filePaths <- getGEOSuppFiles("GSE29721")
@@ -95,16 +96,16 @@
 prepareData <- function(celpath, isAffymetrix = TRUE) {
   # --- load in data -----------------
   list <- list.files(celpath, full.names=TRUE)
-  data <- read.celfiles(list)
+  data <- oligo::read.celfiles(list)
 
   # --- normalize data -----------------
-  data.rma <- rma(data)
+  data.rma <- oligo::rma(data)
   data.matrix <- exprs(data.rma)
 
   # --- annotate probeID to gene symbol -----------------
   rowName <- row.names(data.matrix)
 
-  ensembl <- useEnsembl(biomart = "genes", dataset = "hsapiens_gene_ensembl")
+  ensembl <- biomaRt::useEnsembl(biomart = "genes", dataset = "hsapiens_gene_ensembl")
 
   # check platform
   if (isAffymetrix) {
@@ -114,7 +115,7 @@ prepareData <- function(celpath, isAffymetrix = TRUE) {
   }
 
   # getting gene symbols
-  gN <- getBM(attributes = c(attribute, 'hgnc_symbol'),
+  gN <- biomaRt::getBM(attributes = c(attribute, 'hgnc_symbol'),
               filters = attribute,
               values = rowName,
               mart = ensembl)
@@ -143,10 +144,8 @@ prepareData <- function(celpath, isAffymetrix = TRUE) {
   for (item in rowName) {
     if (isAffymetrix) {
       gene <- dplyr::filter(gN, affy_hg_u133_plus_2 == item)
-        #gN %>% filter(affy_hg_u133_plus_2 == item)
     } else {
       gene <- dplyr::filter(gN, entrezgene_id == item)
-      #gN %>% filter(entrezgene_id == item)
     }
 
     if (nrow(gene) > 0) {
