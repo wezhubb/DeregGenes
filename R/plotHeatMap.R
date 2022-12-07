@@ -85,7 +85,7 @@ plotHeatMap <- function(data, nUp, nDown) {
     return(-1)
   }
 
-  if (missing(data) && missing(down)) {
+  if (missing(data)) {
     print("please enter data")
     return(-1)
   }
@@ -96,17 +96,18 @@ plotHeatMap <- function(data, nUp, nDown) {
   h <- nrow(hminput)
 
   # setting up graph environment
-  tiff(file = "logFC.tiff",
-       width = 15,
-       height = 20,
-       units = "cm",
-       compression = "lzw",
-       bg = "white",
-       res = 400)
+  #tiff(file = "logFC.tiff",
+  #     width = 15,
+  #     height = 20,
+  #     units = "cm",
+  #     compression = "lzw",
+  #     bg = "white",
+  #     res = 400)
 
   # plot heatmap
   pheatmap(hminput,
            display_numbers = TRUE,
+           units = 'cm',
            fontsize_row = 10,
            fontsize_col = 12,
            color = colorRampPalette(c("green", "white","red"))(50),
@@ -114,10 +115,10 @@ plotHeatMap <- function(data, nUp, nDown) {
            cluster_rows = FALSE, )
 
   # reset plot device
-  par()
-  dev.off()
+  #par()
+  #dev.off()
 
-  return(1)
+  #return(1)
 }
 
 # [ END]

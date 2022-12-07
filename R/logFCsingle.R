@@ -68,6 +68,8 @@ logFCsingle <- function(expressionLevel, setUp) {
   fit2 <- contrasts.fit(fit, cont.matrix)
   fit2 <- eBayes(fit2)
 
+  print('success')
+
   return(topTable(fit2, adjust = 'fdr', number = nrow(expressionLevel)))
 }
 

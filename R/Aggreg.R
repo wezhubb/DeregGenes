@@ -151,6 +151,8 @@ Aggreg <- function(listLogFC, listTitle, padj = 0.01, logFC = 1) {
   hminput <- newTab[c(as.vector(upSig[1:nrow(upSig), 1]),
                       as.vector(downSig[1:nrow(downSig), 1])), ]
 
+  print('a success')
+
   return(list(upSig, downSig, hminput))
 
 }
