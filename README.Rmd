@@ -65,9 +65,11 @@ See `help(package = "DeregGenes")` for further details and references provided b
 ## Contributions
 The package is created by Wenzhu Ye.
 
-The `prepareData` function use of `biomaRt` package to get the HGNC gene symbol.
-The `logFCsingle` function use of `limma` package to compute linear fit of the gene expression.
+The `prepareData` function use of `oligo` package to read in and normalize CEl file, use of `biomaRt` package to get the HGNC gene symbol, and use of `dplyr` package to filter dataset.
+The `logFCsingle` function use of `impute` package to impute the missing values in dataset and use of `limma` package to compute linear fit of the gene expression.
+The `Aggreg` function use of `RobustRankAggreg` package to compute overall preformance of each gene's expression level across target studies.
 The `plotHeatMap` function use of `pheatmap` package to plot the heatmap.
+`shinny` package is used to develop shinny app.
 
 ## Acknowledgements
 This package was developed as part of an assessment for 2022f BCB410H: Applied Bioinformatics, University of Toronto, Toronto, Canada.
@@ -96,4 +98,7 @@ Kolde R (2019). _pheatmap: Pretty Heatmaps_. R package version 1.0.12, <https://
 Wang H, Huo X, Yang XR, He J et al. STAT3-mediated upregulation of lncRNA HOXD-AS1 as a ceRNA facilitates liver cancer metastasis by regulating SOX4. Mol Cancer 2017 Aug 14;16(1):136. PMID: 28810927
 
 Stefanska B, Huang J, Bhattacharyya B, Suderman M et al. Definition of the landscape of promoter DNA hypomethylation in liver cancer. Cancer Res 2011 Sep 1;71(17):5891-903. PMID: 21747116
+
+R Core Team (2022). R: A language and environment for statistical computing. R Foundation for
+Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
 

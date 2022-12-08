@@ -85,12 +85,13 @@
 #' unlink(untarPath, recursive = TRUE)
 #' }
 #'
+#' # import tidyverse
+#' # pd.hg.u133.plus.2
+#'
 #' @export
 #' @importFrom oligo read.celfiles rma
 #' @importFrom biomaRt useEnsembl getBM
-#' @import tidyverse
 #' @import dplyr
-#' @import pd.hg.u133.plus.2
 #'
 
 prepareData <- function(celpath, isAffymetrix = TRUE) {

@@ -18,12 +18,10 @@ Imports:
     biomaRt,
     impute,
     oligo,
-    limma (>= 3.52.0),
-    pheatmap (>= 1.0.12),
-    RobustRankAggreg (>= 1.2.1),
-    tidyverse,
+    limma,
+    pheatmap,
+    RobustRankAggreg,
     dplyr,
-    pd.hg.u133.plus.2,
     shiny
 Suggests: 
     rmarkdown,

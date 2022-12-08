@@ -94,10 +94,15 @@ provided by `citation("DeregGenes")`.
 
 The package is created by Wenzhu Ye.
 
-The `prepareData` function use of `biomaRt` package to get the HGNC gene
-symbol. The `logFCsingle` function use of `limma` package to compute
-linear fit of the gene expression. The `plotHeatMap` function use of
-`pheatmap` package to plot the heatmap.
+The `prepareData` function use of `oligo` package to read in and
+normalize CEl file, use of `biomaRt` package to get the HGNC gene
+symbol, and use of `dplyr` package to filter dataset. The `logFCsingle`
+function use of `impute` package to impute the missing values in dataset
+and use of `limma` package to compute linear fit of the gene expression.
+The `Aggreg` function use of `RobustRankAggreg` package to compute
+overall preformance of each gene’s expression level across target
+studies. The `plotHeatMap` function use of `pheatmap` package to plot
+the heatmap. `shinny` package is used to develop shinny app.
 
 ## Acknowledgements
 
@@ -155,3 +160,7 @@ regulating SOX4. Mol Cancer 2017 Aug 14;16(1):136. PMID: 28810927
 Stefanska B, Huang J, Bhattacharyya B, Suderman M et al. Definition of
 the landscape of promoter DNA hypomethylation in liver cancer. Cancer
 Res 2011 Sep 1;71(17):5891-903. PMID: 21747116
+
+R Core Team (2022). R: A language and environment for statistical
+computing. R Foundation for Statistical Computing, Vienna, Austria. URL
+<https://www.R-project.org/>.

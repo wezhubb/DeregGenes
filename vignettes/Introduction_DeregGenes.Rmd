@@ -234,6 +234,8 @@ knitr::include_graphics("../inst/extdata/logFC.jpg")
 
 * Stefanska B, Huang J, Bhattacharyya B, Suderman M et al. Definition of the landscape of promoter DNA hypomethylation in liver cancer. Cancer Res 2011 Sep 1;71(17):5891-903. PMID: 21747116
 
+* R Core Team (2022). R: A language and environment for statistical computing. R Foundation for
+Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
 
 ```{r}
 sessionInfo()

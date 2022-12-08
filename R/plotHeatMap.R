@@ -74,29 +74,22 @@
 #'
 #' @export
 #' @import pheatmap
-#' @importFrom dplyr %>%
 
 plotHeatMap <- function(data, nUp = -1, nDown = -1) {
   # -- check if data exist--
   if (missing(data)) {
     stop("please enter data")
-    #print("please enter data")
-    #return(-1)
   }
 
   # -- check nUp and nDown value --
   if (typeof(nUp) != 'double' || typeof(nDown) != 'double') {
     stop("nUp and nDown should both be type double")
-    #print("nUp and nDown should both be type double")
-    #return(-1)
   }
 
   if (nUp == -1 && nDown == -1) {
     hminput <- data
   } else if (nUp < 0 | nDown < 0) {
     stop("please enter a number greater than 0")
-    #print("please enter a number greater than 0")
-    #return(-1)
   } else {
     top <- head(data, 2)
     bottom <- tail(data, 2)
