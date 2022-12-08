@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotHeatMap.R
 \name{plotHeatMap}
 \alias{plotHeatMap}
-\title{drawing heatmap of gene differential expression data}
+\title{Drawing heatmap of gene differential expression data}
 \usage{
 plotHeatMap(data, nUp = -1, nDown = -1)
 }

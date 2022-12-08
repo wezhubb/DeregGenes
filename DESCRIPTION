@@ -6,7 +6,7 @@ Authors@R: person("Wenzhu", "Ye",
                   email = "w.ye@utoronto.ca", 
                   role = c("aut", "cre"))
 Maintainer: Wenzhu Ye <w.ye@utoronto.ca>
-Description: DeregGenes is a R pacakge to find genes that are deregulated in different diseases and produce heatmap of them. 
+Description: DeregGenes is a R pacakge to find genes that are deregulated in different diseases and produce heatmap of them. This package could also allow users to put different results together to generate a heatmap for cross studies analysis. It improves users’ time on massive data cleaning and data annotating processes prior to the analysis since different data prepared by different platforms will need to be handled by different tools. Moreover, this package provides a simple way to let users get a summarised result across multiple current studies data to provide them with a more confident result and conclusion. Also, using this package will save users time to switch back and forth between different distinct packages and learn different documentation since the different packages will require different input data types which is not available on any current published r package. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

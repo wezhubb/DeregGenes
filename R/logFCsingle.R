@@ -4,7 +4,7 @@
 # Version: 1.0.0
 # Bugs and Issues: N/A
 
-#' computing gene differential expression across one study
+#' Computing gene differential expression across one study
 #'
 #' logFCsingle is a function to analyze the gene expression data to find
 #' gene expression fold change/gene differential expression for each gene in

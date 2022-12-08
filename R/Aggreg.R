@@ -4,7 +4,7 @@
 # Version: 1.0.0
 # Bugs and Issues: N/A
 
-#' aggregate gene differential expression from different studies together
+#' Aggregate gene differential expression from different studies together
 #'
 #' Aggreg is a function to aggregate different gene expression fold changes
 #' across different studies. This function will only keep the genes that

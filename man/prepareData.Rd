@@ -2,7 +2,7 @@
 % Please edit documentation in R/prepareData.R
 \name{prepareData}
 \alias{prepareData}
-\title{preparing CEL data for furthe gene differential expression analysis}
+\title{Preparing CEL data for furthe gene differential expression analysis}
 \usage{
 prepareData(celpath, isAffymetrix = TRUE)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/logFCsingle.R
 \name{logFCsingle}
 \alias{logFCsingle}
-\title{computing gene differential expression across one study}
+\title{Computing gene differential expression across one study}
 \usage{
 logFCsingle(expressionLevel, setUp)
 }

@@ -4,7 +4,7 @@
 # Version: 1.0.0
 # Bugs and Issues: N/A
 
-#' preparing CEL data for furthe gene differential expression analysis
+#' Preparing CEL data for furthe gene differential expression analysis
 #'
 #' prepareData is a function used to clean and annotate the data,
 #' including handling raw CEL format data, putting together different

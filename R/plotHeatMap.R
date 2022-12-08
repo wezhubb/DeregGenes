@@ -4,7 +4,7 @@
 # Version: 1.0.0
 # Bugs and Issues: N/A
 
-#' drawing heatmap of gene differential expression data
+#' Drawing heatmap of gene differential expression data
 #'
 #' plotHeatMap is a function used to draw a heatmap representation of
 #' differential gene expression.

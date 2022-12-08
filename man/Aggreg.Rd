@@ -2,7 +2,7 @@
 % Please edit documentation in R/Aggreg.R
 \name{Aggreg}
 \alias{Aggreg}
-\title{aggregate gene differential expression from different studies together}
+\title{Aggregate gene differential expression from different studies together}
 \usage{
 Aggreg(listLogFC, listTitle, padj = 0.01, logFC = 1)
 }
