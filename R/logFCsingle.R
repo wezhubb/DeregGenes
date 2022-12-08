@@ -55,6 +55,20 @@
 #' @import impute
 
 logFCsingle <- function(expressionLevel, setUp) {
+  # -- error checking  --
+  if (ncol(expressionLevel) != length(setUp)){
+    stop("setUp length must equals to number of cloumn in expressionLevel")
+  } else if (ncol(expressionLevel) == 0) {
+    stop("expressionLevel must have data")
+  }
+
+  for(item in setUp) {
+    if (item != 'mutant' && item != 'control') {
+      stop("expressionLevel must only contain 'mutant' or 'control'")
+    }
+
+  }
+
   # --- impute missing expression data -----------------
   mat <- impute::impute.knn(expressionLevel)
   rt <- mat$data

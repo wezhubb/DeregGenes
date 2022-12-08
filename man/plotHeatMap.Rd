@@ -19,14 +19,14 @@ significant logFC values from up-regulated data. If both nUp and ndown
 is not given, all of the data will be plot. Notice that n must be
 smaller or equal the number of genes that are up-regulated in data.}
 
-\item{ndown}{A numeric vector indicate the top n numbers of genes with
+\item{nDown}{A numeric vector indicate the top n numbers of genes with
 significant logFC values from down-regulated data. If both nUp and ndown
 is not given, all of the data will be plot. Notice that n must be
 smaller or equal the number of genes that are down-regulated in data.}
 }
 \value{
 This function will return 1 if the function has been executed
-successfully, and return -1 if error occurred
+successfully.
 }
 \description{
 plotHeatMap is a function used to draw a heatmap representation of

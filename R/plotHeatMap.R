@@ -22,13 +22,13 @@
 #'     significant logFC values from up-regulated data. If both nUp and ndown
 #'     is not given, all of the data will be plot. Notice that n must be
 #'     smaller or equal the number of genes that are up-regulated in data.
-#' @param ndown A numeric vector indicate the top n numbers of genes with
+#' @param nDown A numeric vector indicate the top n numbers of genes with
 #'     significant logFC values from down-regulated data. If both nUp and ndown
 #'     is not given, all of the data will be plot. Notice that n must be
 #'     smaller or equal the number of genes that are down-regulated in data.
 #'
 #' @return This function will return 1 if the function has been executed
-#'     successfully, and return -1 if error occurred
+#'     successfully.
 #'
 #' @references
 #' Kolde R (2019). _pheatmap: Pretty Heatmaps_.
@@ -79,17 +79,24 @@
 plotHeatMap <- function(data, nUp = -1, nDown = -1) {
   # -- check if data exist--
   if (missing(data)) {
-    print("please enter data")
-    return(-1)
+    stop("please enter data")
+    #print("please enter data")
+    #return(-1)
   }
 
   # -- check nUp and nDown value --
+  if (typeof(nUp) != 'double' || typeof(nDown) != 'double') {
+    stop("nUp and nDown should both be type double")
+    #print("nUp and nDown should both be type double")
+    #return(-1)
+  }
 
   if (nUp == -1 && nDown == -1) {
     hminput <- data
   } else if (nUp < 0 | nDown < 0) {
-    print("please enter a number greater than 0")
-    return(-1)
+    stop("please enter a number greater than 0")
+    #print("please enter a number greater than 0")
+    #return(-1)
   } else {
     top <- head(data, 2)
     bottom <- tail(data, 2)

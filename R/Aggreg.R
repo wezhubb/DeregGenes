@@ -31,8 +31,7 @@
 #'     four columns: gene symbol(Name), p value(Pvalue), adjust p
 #'     value(adjPvalue), and expressional change(logFC). The last element of
 #'     the list is a aggregated data frame where each row is a gene,
-#'     and each column is the logFC of different studies. If error occurs,
-#'     -1 will be returned.
+#'     and each column is the logFC of different studies.
 #'
 #' @references
 #' Kolde R (2022). _RobustRankAggreg: Methods for Robust Rank Aggregation_.
@@ -75,9 +74,25 @@
 
 
 Aggreg <- function(listLogFC, listTitle, padj = 0.01, logFC = 1) {
+  # -- error checking --
   if (length(listLogFC) < 2) {
-    print("please enter more than one study")
-    return(-1)
+    stop("please enter more than one study")
+  }
+
+  if (!is.numeric(padj) || !is.numeric(logFC)) {
+    stop("padj and logFC should be number")
+  }
+
+  if (padj < 0 || padj > 1) {
+    stop("padj should be between 0 and 1")
+  }
+
+  if (logFC < 0) {
+    stop("logFC should be positive")
+  }
+
+  if (length(listLogFC) != length(listTitle)) {
+    stop("length of listLogFc should be equal to length of listTitle")
   }
 
   # --- init different list -----------------

@@ -32,8 +32,7 @@ first two data frame, each row a a different genes, and there will be
 four columns: gene symbol(Name), p value(Pvalue), adjust p
 value(adjPvalue), and expressional change(logFC). The last element of
 the list is a aggregated data frame where each row is a gene,
-and each column is the logFC of different studies. If error occurs,
--1 will be returned.
+and each column is the logFC of different studies.
 }
 \description{
 Aggreg is a function to aggregate different gene expression fold changes

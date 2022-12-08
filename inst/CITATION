@@ -5,7 +5,7 @@ citEntry(
   title    = "DeregGenes: find deregulated genes",
   author   = "Wenzhu Ye",
   year     = 2022,
-  url      = https://github.com/wezhubb/DeregGenes,
+  url      = "https://github.com/wezhubb/DeregGenes",
   textVersion = paste(
       "Ye, W. (2022) DeregGenes: find deregulated genes. Unpublished. URL: https://github.com/wezhubb/DeregGenes
   )
