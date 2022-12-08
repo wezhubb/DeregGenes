@@ -22,8 +22,7 @@ Imports:
     pheatmap,
     RobustRankAggreg,
     dplyr,
-    shiny,
-    BiocGenerics
+    shiny
 Suggests: 
     rmarkdown,
     knitr,
