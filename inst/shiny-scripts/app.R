@@ -1,5 +1,12 @@
+# Purpose: shinny function
+# Author: Wenzhu Ye
+# Date: 12.07.2022
+# Version: 1.0.0
+# Bugs and Issues: N/A
+
 # The code is adapted from
-# RStudio Inc. (2013). Tabsets. Shiny Gallery. URL:https://shiny.rstudio.com/gallery/tabsets.html
+# RStudio Inc. (2013). Tabsets. Shiny Gallery.
+#    URL:https://shiny.rstudio.com/gallery/tabsets.html
 
 library(shiny)
 
@@ -19,7 +26,9 @@ ui <- fluidPage(
       align = "center",
 
       tags$p("Display heatmap, aggregate anlysis result from inputed data."),
+
       br(),
+
       tags$p("Upload CSV files containing the data from gene differential
       expression. The first cloumn of the CSV file should be the gene symbols,
       and for the rest of the columns, each column should represent the gene
@@ -29,23 +38,43 @@ ui <- fluidPage(
       br(),
 
       # Input files
-      tags$a(href = "https://github.com/wezhubb/DeregGenes/blob/master/inst/extdata/GSE29721.csv", "Example Dataset 1"),
+      tags$a(href = paste("https://github.com/wezhubb/DeregGenes/blob/master",
+                          "/inst/extdata/GSE29721.csv", sep = ''),
+             "Example Dataset 1"),
 
-      fileInput("input1", "Choose CSV File for gene differential expression data",
+      fileInput("input1",
+                "Choose CSV File for gene differential expression data",
                 accept = ".csv"),
 
-      tags$p("Enter input class for above input file(default is given for example dataset 1), please seperate each sample using comma, no space"),
-      textAreaInput(inputId = 'class1', label = 'class 1',
-                    value = "mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control"),
+      tags$p("Enter input class for above input file(default is given for
+             example dataset 1), please seperate each sample using comma,
+             no space"),
+      textAreaInput(inputId = 'class1',
+                    label = 'class 1',
+                    value = paste("mutant,control,mutant,control,mutant,",
+                     "control,mutant,control,mutant,control,mutant,control,",
+                     "mutant,control,mutant,control,mutant,control,mutant,",
+                     "control", sep = '')
+                     ),
 
-      tags$a(href="https://github.com/wezhubb/DeregGenes/blob/master/inst/extdata/GSE84402.csv", "Example Dataset 2"),
+      tags$a(href = paste("https://github.com/wezhubb/DeregGenes",
+                          "/blob/master/inst/extdata/GSE84402.csv", sep = ''),
+             "Example Dataset 2"),
 
-      fileInput("input2", "Choose CSV File for gene differential expression data",
+      fileInput("input2",
+                "Choose CSV File for gene differential expression data",
                 accept = ".csv"),
 
-      tags$p("Enter input class for above input file(default is given for example dataset 2), please seperate each sample using comma, no space"),
+      tags$p("Enter input class for above input file(default is given for
+             example dataset 2), please seperate each sample using comma,
+             no space"),
       textAreaInput(inputId = 'class2', label = 'class 2',
-                    value = "mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control,mutant,control"),
+                    value = paste("mutant,control,mutant,control,mutant,",
+                                  "control,mutant,control,mutant,control,",
+                                  "mutant,control,mutant,control,mutant,",
+                                  "control,mutant,control,mutant,control,",
+                                  "mutant,control,mutant,control,mutant,",
+                                  "control,mutant,control", sep = '')),
 
       # Input padj cutoff
       textInput(inputId = "padj",
@@ -80,9 +109,10 @@ ui <- fluidPage(
 
 # Define server
 server <- function(input, output) {
+  # change max size to 30MB
   options(shiny.maxRequestSize=30*1024^2)
 
-
+  # check button status
   v <- reactiveValues(dothing = FALSE)
 
   observeEvent(input$Start, {
@@ -93,7 +123,7 @@ server <- function(input, output) {
     v$dothing <- FALSE
   })
 
-
+  # event after button pressed
   aggreg <- eventReactive(eventExpr = input$Start, {
     i1 <- as.matrix(as.data.frame(read.csv(input$input1$datapath,
                            sep = ",",
@@ -115,7 +145,8 @@ server <- function(input, output) {
     result2 <- DeregGenes::logFCsingle(i2, class)
     listLogFC <- list(result1, result2)
     listTitle <- c("GSE29721", "GSE84402")
-    DeregGenes::Aggreg(listLogFC, listTitle, padj = as.numeric(input$padj), logFC = as.numeric(input$logFC))
+    DeregGenes::Aggreg(listLogFC, listTitle, padj = as.numeric(input$padj),
+                       logFC = as.numeric(input$logFC))
   })
 
 

@@ -1,6 +1,6 @@
 # Purpose: prepareData function
 # Author: Wenzhu Ye
-# Date: 11.15.2022
+# Date: 12.7.2022
 # Version: 1.0.0
 # Bugs and Issues: N/A
 
@@ -106,7 +106,8 @@ prepareData <- function(celpath, isAffymetrix = TRUE) {
   # --- annotate probeID to gene symbol -----------------
   rowName <- row.names(data.matrix)
 
-  ensembl <- biomaRt::useEnsembl(biomart = "genes", dataset = "hsapiens_gene_ensembl")
+  ensembl <- biomaRt::useEnsembl(biomart = "genes",
+                                 dataset = "hsapiens_gene_ensembl")
 
   # check platform
   if (isAffymetrix) {
