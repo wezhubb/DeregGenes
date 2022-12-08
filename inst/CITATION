@@ -1,12 +1,13 @@
 citHeader("To cite DeregGenes in publications use:")
 
-citEntry(
-  entry    = "unpublished",
-  title    = "DeregGenes: find deregulated genes",
-  author   = "Wenzhu Ye",
-  year     = 2022,
-  url      = "https://github.com/wezhubb/DeregGenes",
-  textVersion = paste(
-      "Ye, W. (2022) DeregGenes: find deregulated genes. Unpublished. URL: https://github.com/wezhubb/DeregGenes
-  )
+citEntry(entry = "Unpublished",
+  title        = "DeregGenes: find deregulated genes",
+  author       = "Wenzhu Ye",
+  note         = "Unpublished",
+  year         = "2022",
+
+  textVersion  =
+  paste("Ye, W. (2022) DeregGenes: find deregulated genes.
+        Unpublished. URL https://github.com/wezhub/DeregGenes.")
 )
+
