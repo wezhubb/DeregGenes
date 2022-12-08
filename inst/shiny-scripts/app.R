@@ -4,10 +4,6 @@
 # Version: 1.0.0
 # Bugs and Issues: N/A
 
-# The code is adapted from
-# RStudio Inc. (2013). Tabsets. Shiny Gallery.
-#    URL:https://shiny.rstudio.com/gallery/tabsets.html
-
 library(shiny)
 
 
