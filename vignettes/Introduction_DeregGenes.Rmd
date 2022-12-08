@@ -21,9 +21,13 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
+require("devtools")
+devtools::install_github("wezhubb/DeregGenes")
 library(DeregGenes)
 
 # load in helper packages for the demo
+require("BiocManager")
+BiocManager::install("GEOquery")
 library(GEOquery)
 ```
 
