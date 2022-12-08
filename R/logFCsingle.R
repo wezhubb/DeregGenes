@@ -53,6 +53,7 @@
 #' @export
 #' @import limma
 #' @import impute
+#' @import BiocGenerics
 
 logFCsingle <- function(expressionLevel, setUp) {
   # -- error checking  --

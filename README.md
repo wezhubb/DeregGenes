@@ -47,6 +47,7 @@ DeregGenes::runDeregGenes()
 
 ``` r
 ls("package:DeregGenes")
+data(package = "DeregGenes") 
 browseVignettes("DeregGenes")
 ```
 
